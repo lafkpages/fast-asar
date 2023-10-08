@@ -18,25 +18,29 @@ test("Init ASAR", () => {
   expect(asar.header).toBeInstanceOf(Header);
 });
 
-test("getFromPath", () => {
-  const packageJson = asar?.header.getFromPath("package.json") ?? null;
+let packageJsonEntry: Entry | null = null;
 
-  expect(packageJson).toBeInstanceOf(Entry);
+test("getFromPath", () => {
+  packageJsonEntry = asar?.header.getFromPath("package.json") ?? null;
+
+  expect(packageJsonEntry).toBeInstanceOf(Entry);
 });
 
-// test("isFile", () => {
-//   expect(asar?.isFile("package.json")).toBeTrue();
-//   expect(asar?.isFile("./package.json")).toBeTrue();
-// });
+test("Entry.isFile", () => {
+  if (packageJsonEntry == null) {
+    return;
+  }
 
-// test("isDirectory", () => {
-//   expect(asar?.isDirectory("package.json")).toBeFalse();
-//   expect(asar?.isDirectory("./package.json")).toBeFalse();
-//   expect(asar?.isDirectory("foo/bar/../../package.json")).toBeFalse();
-//   expect(asar?.isDirectory("package.json/")).toBeFalse();
+  expect(Entry.isFile(packageJsonEntry)).toBeTrue();
+});
 
-//   expect(asar?.isDirectory("node_modules")).toBeTrue();
-// });
+test("isDirectory", () => {
+  if (packageJsonEntry == null) {
+    return;
+  }
+
+  expect(Entry.isDirectory(packageJsonEntry)).toBeFalse();
+});
 
 test("readFile", () => {
   const packageJson = asar?.readFile("package.json")?.toString() ?? null;
