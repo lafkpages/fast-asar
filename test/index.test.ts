@@ -45,8 +45,6 @@ test("isDirectory", () => {
 test("readFile", () => {
   const packageJson = asar?.readFile("package.json")?.toString() ?? null;
 
-  console.debug(packageJson);
-
   expect(packageJson).toBeString();
   expect(packageJson?.[0]).toBe("{");
 });
