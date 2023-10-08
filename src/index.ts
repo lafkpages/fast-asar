@@ -1,3 +1,4 @@
+import { normalize as normalizePath } from "path";
 import { headerSizeMetadata, headerMetadata } from "./consts";
 import { createFromBuffer } from "@tybys/chromium-pickle-js";
 
@@ -45,6 +46,7 @@ export class Header {
   }
 
   getFromPath(path: string) {
+    path = normalizePath(path);
     const chunks = path.split("/");
 
     let current = this.data;
