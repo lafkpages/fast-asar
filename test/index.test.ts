@@ -15,12 +15,17 @@ test("new Asar", () => {
   expect(asar).toBeInstanceOf(Asar);
 });
 
-test("Asar.header", () => {
+test("Asar.headerSize", () => {
   expect(asar.headerSize).toBeNumber();
+});
+
+test("Asar.rawHeader", () => {
   expect(asar.rawHeader).toBeString();
 
   writeFile("test/ignore/asar-header.json", asar.rawHeader);
+});
 
+test("Asar.header", () => {
   expect(asar.header).toBeInstanceOf(Header);
 });
 
