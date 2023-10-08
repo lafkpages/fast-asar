@@ -39,4 +39,35 @@ export class Header {
   constructor(rawHeader: string) {
     this.data = JSON.parse(rawHeader);
   }
+
+  getFromPath(path: string) {
+    const chunks = path.split("/");
+
+    let current = this.data;
+
+    for (let _i in chunks) {
+      const i = parseInt(_i);
+      const chunk = chunks[i];
+
+      if (!current.files) {
+        return null;
+      }
+
+      current = current.files[chunk];
+
+      if (!current) {
+        return null;
+      }
+
+      if (i == chunks.length - 1) {
+        return current;
+      }
+    }
+  }
+
+  isDirectory(path: string) {
+    const entry = this.getFromPath(path);
+
+    return !!(entry && entry.files);
+  }
 }
