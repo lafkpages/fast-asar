@@ -190,6 +190,10 @@ export class DirectoryEntry extends Entry {
 
     throw new Error("[DirectoryEntry.getFromPath] Unreachable");
   }
+
+  listFiles() {
+    return Object.keys(this.data.files);
+  }
 }
 
 export class Header extends DirectoryEntry {
