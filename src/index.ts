@@ -4,12 +4,15 @@ import { createFromBuffer } from "@tybys/chromium-pickle-js";
 export class Asar {
   private data: Uint8Array;
   private headerSize: number;
-  private header: string;
+  private rawHeader: string;
+  private header: any;
 
   constructor(data: Uint8Array) {
     this.data = data;
+
     this.headerSize = this.readHeaderSize();
-    this.header = this.readHeader();
+    this.rawHeader = this.readHeader();
+    this.header = JSON.parse(this.rawHeader);
   }
 
   private readHeaderSize() {
