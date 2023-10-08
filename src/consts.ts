@@ -5,6 +5,6 @@ export const headerSizeMetadata = {
 export const headerMetadata = {
   start: headerSizeMetadata.end,
   end(headerSize: number) {
-    return this.start + headerSize;
+    return this.start + headerSize - 8;
   },
 } as const;
