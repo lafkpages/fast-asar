@@ -5,14 +5,14 @@ export class Asar {
   private data: Uint8Array;
   private headerSize: number;
   private rawHeader: string;
-  private header: any;
+  private header: Header;
 
   constructor(data: Uint8Array) {
     this.data = data;
 
     this.headerSize = this.readHeaderSize();
     this.rawHeader = this.readHeader();
-    this.header = JSON.parse(this.rawHeader);
+    this.header = new Header(this.rawHeader);
   }
 
   private readHeaderSize() {
@@ -30,5 +30,13 @@ export class Asar {
       headerMetadata.end(this.headerSize)
     );
     return headerBuf.toString();
+  }
+}
+
+export class Header {
+  private data: any;
+
+  constructor(rawHeader: string) {
+    this.data = JSON.parse(rawHeader);
   }
 }

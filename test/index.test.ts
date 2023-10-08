@@ -1,6 +1,6 @@
 import { test, expect } from "bun:test";
 
-import { Asar } from "../src";
+import { Asar, Header } from "../src";
 import { readFile } from "fs/promises";
 
 const asarData = await readFile("test/app.asar");
@@ -11,5 +11,5 @@ test("Init ASAR", () => {
   expect(asar).toBeInstanceOf(Asar);
   expect(asar.headerSize).toBeNumber();
   expect(asar.rawHeader).toBeString();
-  expect(asar.header).toBeDefined();
+  expect(asar.header).toBeInstanceOf(Header);
 });
