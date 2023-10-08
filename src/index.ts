@@ -154,6 +154,6 @@ export class Header extends Entry {
       return null;
     }
 
-    return offset + headerMetadata.end(this.size);
+    return offset + headerMetadata.end(this.size) + 2;
   }
 }
