@@ -16,7 +16,7 @@ test("Init ASAR", () => {
   expect(asar.headerSize).toBeNumber();
   expect(asar.rawHeader).toBeString();
 
-  writeFile("test/ignore/header.json", asar.rawHeader);
+  writeFile("test/ignore/asar-header.json", asar.rawHeader);
 
   expect(asar.header).toBeInstanceOf(Header);
 });
