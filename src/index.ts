@@ -140,7 +140,7 @@ export class FileEntry extends Entry {
   }
 
   getFileOffsetFromAsar(asar: Asar) {
-    return this.getFileOffset() + headerMetadata.end(asar.headerSize) + 1;
+    return this.getFileOffset() + headerMetadata.end(asar.headerSize) + 2;
   }
 }
 
