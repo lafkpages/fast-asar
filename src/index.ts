@@ -31,6 +31,10 @@ export class Asar {
     );
     return headerBuf.toString();
   }
+
+  isDirectory(...args: Parameters<Header["isDirectory"]>) {
+    return this.header.isDirectory(...args);
+  }
 }
 
 export class Header {
