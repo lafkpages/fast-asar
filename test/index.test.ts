@@ -37,6 +37,14 @@ test("Header.getFromPath", () => {
   expect(packageJsonEntry).toBeInstanceOf(Entry);
 });
 
+test("Header.listFiles", () => {
+  const files = asar.header.listFiles();
+
+  expect(files).toBeArray();
+  expect(files).not.toBeEmpty();
+  expect(files).toContain("package.json");
+});
+
 test("Entry.isFile", () => {
   expect(Entry.isFile(packageJsonEntry)).toBeTrue();
 });
