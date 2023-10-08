@@ -45,7 +45,7 @@ test("Entry.isDirectory", () => {
   expect(Entry.isDirectory(packageJsonEntry)).toBeFalse();
 });
 
-test("Asar.readFile", async () => {
+test("Asar.readFile [package.json]", async () => {
   const packageJson = asar.readFile("package.json").toString();
 
   expect(packageJson).toBeString();
@@ -53,4 +53,12 @@ test("Asar.readFile", async () => {
   await writeFile("test/ignore/asar-package.json", packageJson!);
 
   expect(packageJson[0]).toBe("{");
+});
+
+test("Asar.readFile [dist/main.js]", async () => {
+  const packageMain = asar.readFile("dist/main.js").toString();
+
+  expect(packageMain).toBeString();
+
+  await writeFile("test/ignore/asar-main.js", packageMain!);
 });
