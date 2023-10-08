@@ -1,7 +1,10 @@
 export const headerSizeMetadata = {
-  offset: 0,
-  size: 8,
+  start: 8,
+  end: 16,
 } as const;
 export const headerMetadata = {
-  offset: headerSizeMetadata.offset + headerSizeMetadata.size,
+  start: headerSizeMetadata.end,
+  end(headerSize: number) {
+    return this.start + headerSize;
+  },
 } as const;
