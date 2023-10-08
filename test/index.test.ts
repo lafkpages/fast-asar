@@ -28,4 +28,6 @@ test("isDirectory", () => {
   expect(asar?.isDirectory("./package.json")).toBeFalse();
   expect(asar?.isDirectory("foo/bar/../../package.json")).toBeFalse();
   expect(asar?.isDirectory("package.json/")).toBeFalse();
+
+  expect(asar?.isDirectory("node_modules")).toBeTrue();
 });
