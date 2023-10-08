@@ -40,6 +40,22 @@ export class Asar {
   isFile(...args: Parameters<Header["isFile"]>) {
     return this.header.isFile(...args);
   }
+
+  readFile(path: string) {
+    const offset = this.header.getFileOffset(path);
+
+    if (!offset) {
+      return null;
+    }
+
+    const size = this.data.subarray(offset, offset + 8);
+    const pickle = createFromBuffer(size);
+
+    const sizeBuf = pickle.createIterator().readInt();
+    const dataBuf = this.data.subarray(offset + 8, offset + 8 + sizeBuf);
+
+    return dataBuf;
+  }
 }
 
 export class Header {

@@ -31,3 +31,10 @@ test("isDirectory", () => {
 
   expect(asar?.isDirectory("node_modules")).toBeTrue();
 });
+
+test("readFile", () => {
+  const packageJson = asar?.readFile("package.json")?.toString() ?? null;
+
+  expect(packageJson).toBeString();
+  expect(packageJson?.[0]).toBe("{");
+});
