@@ -86,4 +86,14 @@ export class Header {
 
     return !!(entry && typeof entry.size == "number");
   }
+
+  getFileOffset(path: string) {
+    const entry = this.getFromPath(path);
+
+    if (!entry) {
+      return null;
+    }
+
+    return parseInt(entry.offset);
+  }
 }
