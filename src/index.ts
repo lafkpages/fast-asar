@@ -41,10 +41,10 @@ export class Asar {
     return this.header.isFile(...args);
   }
 
-  readFile(path: string) {
-    const offset = this.header.getFileOffset(path);
+  readFile(path: Entry | string) {
+    const offset = this.header.getRealFileOffset(path);
 
-    if (!offset) {
+    if (offset == null) {
       return null;
     }
 
@@ -140,7 +140,20 @@ export class Entry {
 }
 
 export class Header extends Entry {
+  size: number;
+
   constructor(rawHeader: string) {
     super(JSON.parse(rawHeader));
+    this.size = rawHeader.length;
+  }
+
+  getRealFileOffset(path: Entry | string) {
+    const offset = this.getFileOffset(path);
+
+    if (!offset) {
+      return null;
+    }
+
+    return offset + headerMetadata.end(this.size);
   }
 }
