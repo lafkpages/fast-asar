@@ -36,6 +36,10 @@ export class Asar {
   isDirectory(...args: Parameters<Header["isDirectory"]>) {
     return this.header.isDirectory(...args);
   }
+
+  isFile(...args: Parameters<Header["isFile"]>) {
+    return this.header.isFile(...args);
+  }
 }
 
 export class Header {
@@ -75,5 +79,11 @@ export class Header {
     const entry = this.getFromPath(path);
 
     return !!(entry && entry.files);
+  }
+
+  isFile(path: string) {
+    const entry = this.getFromPath(path);
+
+    return !!(entry && typeof entry.size == "number");
   }
 }
