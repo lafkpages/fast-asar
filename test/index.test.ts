@@ -9,7 +9,7 @@ let asar: Asar | null = null;
 // This test assumes that the ASAR file given belongs
 // to an Electron app, and has a package.json file.
 
-test("Init ASAR", () => {
+test("new Asar", () => {
   asar = new Asar(asarData);
 
   expect(asar).toBeInstanceOf(Asar);
@@ -23,7 +23,7 @@ test("Init ASAR", () => {
 
 let packageJsonEntry: Entry | null = null;
 
-test("getFromPath", () => {
+test("Header.getFromPath", () => {
   packageJsonEntry = asar?.header.getFromPath("package.json") ?? null;
 
   expect(packageJsonEntry).toBeInstanceOf(Entry);
@@ -37,7 +37,7 @@ test("Entry.isFile", () => {
   expect(Entry.isFile(packageJsonEntry)).toBeTrue();
 });
 
-test("isDirectory", () => {
+test("Entry.isDirectory", () => {
   if (packageJsonEntry == null) {
     return;
   }
@@ -45,7 +45,7 @@ test("isDirectory", () => {
   expect(Entry.isDirectory(packageJsonEntry)).toBeFalse();
 });
 
-test("readFile", async () => {
+test("Asar.readFile", async () => {
   const packageJson = asar?.readFile("package.json")?.toString() ?? null;
 
   expect(packageJson).toBeString();
