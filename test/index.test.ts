@@ -9,6 +9,7 @@ test("Init ASAR", () => {
   const asar = new Asar(asarData);
 
   expect(asar).toBeInstanceOf(Asar);
-
-  console.log(asar);
+  expect(asar.headerSize).toBeNumber();
+  expect(asar.rawHeader).toBeString();
+  expect(asar.header).toBeDefined();
 });
