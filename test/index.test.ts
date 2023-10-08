@@ -1,7 +1,7 @@
 import { test, expect } from "bun:test";
 
 import { Asar, Entry, Header } from "../src";
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 
 const asarData = await readFile("test/app.asar");
 let asar: Asar | null = null;
@@ -42,9 +42,12 @@ test("isDirectory", () => {
   expect(Entry.isDirectory(packageJsonEntry)).toBeFalse();
 });
 
-test("readFile", () => {
+test("readFile", async () => {
   const packageJson = asar?.readFile("package.json")?.toString() ?? null;
 
   expect(packageJson).toBeString();
+
+  await writeFile("test/package.json", packageJson!);
+
   expect(packageJson?.[0]).toBe("{");
 });
