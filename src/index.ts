@@ -70,12 +70,9 @@ export class Asar {
     }
 
     const offset = entry.getFileOffsetFromAsar(this);
+    const fileSize = entry.data.size;
 
-    const size = this.data.subarray(offset, offset + 8);
-    const pickle = createFromBuffer(size);
-
-    const sizeBuf = pickle.createIterator().readInt();
-    const dataBuf = this.data.subarray(offset + 8, offset + 8 + sizeBuf);
+    const dataBuf = this.data.subarray(offset, offset + fileSize);
 
     return dataBuf;
   }
@@ -143,7 +140,7 @@ export class FileEntry extends Entry {
   }
 
   getFileOffsetFromAsar(asar: Asar) {
-    return this.getFileOffset() + headerMetadata.end(asar.headerSize) - 7;
+    return this.getFileOffset() + headerMetadata.end(asar.headerSize) + 1;
   }
 }
 
