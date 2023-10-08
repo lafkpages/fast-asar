@@ -4,16 +4,44 @@ import { createFromBuffer } from "@tybys/chromium-pickle-js";
 
 export class Asar {
   data: Uint8Array;
-  headerSize: number;
-  rawHeader: string;
-  header: Header;
+
+  private _headerSize: number | null;
+  private _rawHeader: string | null;
+  private _header: Header | null;
 
   constructor(data: Uint8Array) {
     this.data = data;
 
-    this.headerSize = this.readHeaderSize();
-    this.rawHeader = this.readHeader();
-    this.header = new Header(this.rawHeader);
+    // Lazy initialization.
+    // This is done so that if the user doesn't need
+    // the header, it won't be parsed.
+    this._headerSize = null;
+    this._rawHeader = null;
+    this._header = null;
+  }
+
+  get headerSize() {
+    if (this._headerSize == null) {
+      this._headerSize = this.readHeaderSize();
+    }
+
+    return this._headerSize;
+  }
+
+  get rawHeader() {
+    if (this._rawHeader == null) {
+      this._rawHeader = this.readHeader();
+    }
+
+    return this._rawHeader;
+  }
+
+  get header() {
+    if (this._header == null) {
+      this._header = new Header(this.rawHeader);
+    }
+
+    return this._header;
   }
 
   private readHeaderSize() {
