@@ -43,6 +43,8 @@ test("Header.listFiles", () => {
   expect(files).toBeArray();
   expect(files).not.toBeEmpty();
   expect(files).toContain("package.json");
+
+  console.log("Files: ", files);
 });
 
 test("Entry.isFile", () => {
