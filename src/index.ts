@@ -79,7 +79,11 @@ export class Entry {
     this.data = data;
   }
 
-  getFromPath(path: string) {
+  getFromPath(path: Entry | string) {
+    if (path instanceof Entry) {
+      return path.data;
+    }
+
     path = normalizePath(path);
     const chunks = path.split("/");
 
@@ -108,19 +112,19 @@ export class Entry {
     return null;
   }
 
-  isDirectory(path: string) {
+  isDirectory(path: Entry | string) {
     const entry = this.getFromPath(path);
 
     return !!(entry && "files" in entry);
   }
 
-  isFile(path: string) {
+  isFile(path: Entry | string) {
     const entry = this.getFromPath(path);
 
     return !!(entry && "size" in entry);
   }
 
-  getFileOffset(path: string) {
+  getFileOffset(path: Entry | string) {
     const entry = this.getFromPath(path);
 
     if (!entry) {
