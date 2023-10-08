@@ -58,49 +58,66 @@ export class Asar {
   }
 }
 
-export class Header {
-  private data: any;
+export interface FileEntryData {
+  size: number;
+  offset: string;
+  integrity?: any; // TODO
+}
 
-  constructor(rawHeader: string) {
-    this.data = JSON.parse(rawHeader);
+export interface DirectoryEntryData {
+  files: {
+    [filename: string]: EntryData | undefined;
+  };
+}
+
+export type EntryData = FileEntryData | DirectoryEntryData;
+
+export class Entry {
+  private data: EntryData;
+
+  constructor(data: EntryData) {
+    this.data = data;
   }
 
   getFromPath(path: string) {
     path = normalizePath(path);
     const chunks = path.split("/");
 
-    let current = this.data;
+    let currentEntry = this.data;
 
     for (let _i in chunks) {
       const i = parseInt(_i);
       const chunk = chunks[i];
 
-      if (!current.files) {
+      if (!("files" in currentEntry)) {
         return null;
       }
 
-      current = current.files[chunk];
+      const nextEntry = currentEntry.files[chunk];
 
-      if (!current) {
+      if (!nextEntry) {
         return null;
       }
+      currentEntry = nextEntry;
 
       if (i == chunks.length - 1) {
-        return current;
+        return currentEntry;
       }
     }
+
+    return null;
   }
 
   isDirectory(path: string) {
     const entry = this.getFromPath(path);
 
-    return !!(entry && entry.files);
+    return !!(entry && "files" in entry);
   }
 
   isFile(path: string) {
     const entry = this.getFromPath(path);
 
-    return !!(entry && typeof entry.size == "number");
+    return !!(entry && "size" in entry);
   }
 
   getFileOffset(path: string) {
@@ -110,6 +127,16 @@ export class Header {
       return null;
     }
 
+    if (!("offset" in entry)) {
+      return null;
+    }
+
     return parseInt(entry.offset);
+  }
+}
+
+export class Header extends Entry {
+  constructor(rawHeader: string) {
+    super(JSON.parse(rawHeader));
   }
 }
