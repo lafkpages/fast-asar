@@ -1,6 +1,6 @@
 import { test, expect } from "bun:test";
 
-import { Asar, Header } from "../src";
+import { Asar, Entry, Header } from "../src";
 import { readFile } from "fs/promises";
 
 const asarData = await readFile("test/app.asar");
@@ -18,22 +18,30 @@ test("Init ASAR", () => {
   expect(asar.header).toBeInstanceOf(Header);
 });
 
-test("isFile", () => {
-  expect(asar?.isFile("package.json")).toBeTrue();
-  expect(asar?.isFile("./package.json")).toBeTrue();
+test("getFromPath", () => {
+  const packageJson = asar?.header.getFromPath("package.json") ?? null;
+
+  expect(packageJson).toBeInstanceOf(Entry);
 });
 
-test("isDirectory", () => {
-  expect(asar?.isDirectory("package.json")).toBeFalse();
-  expect(asar?.isDirectory("./package.json")).toBeFalse();
-  expect(asar?.isDirectory("foo/bar/../../package.json")).toBeFalse();
-  expect(asar?.isDirectory("package.json/")).toBeFalse();
+// test("isFile", () => {
+//   expect(asar?.isFile("package.json")).toBeTrue();
+//   expect(asar?.isFile("./package.json")).toBeTrue();
+// });
 
-  expect(asar?.isDirectory("node_modules")).toBeTrue();
-});
+// test("isDirectory", () => {
+//   expect(asar?.isDirectory("package.json")).toBeFalse();
+//   expect(asar?.isDirectory("./package.json")).toBeFalse();
+//   expect(asar?.isDirectory("foo/bar/../../package.json")).toBeFalse();
+//   expect(asar?.isDirectory("package.json/")).toBeFalse();
+
+//   expect(asar?.isDirectory("node_modules")).toBeTrue();
+// });
 
 test("readFile", () => {
   const packageJson = asar?.readFile("package.json")?.toString() ?? null;
+
+  console.debug(packageJson);
 
   expect(packageJson).toBeString();
   expect(packageJson?.[0]).toBe("{");

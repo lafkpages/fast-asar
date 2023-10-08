@@ -3,10 +3,10 @@ import { headerSizeMetadata, headerMetadata } from "./consts";
 import { createFromBuffer } from "@tybys/chromium-pickle-js";
 
 export class Asar {
-  private data: Uint8Array;
-  private headerSize: number;
-  private rawHeader: string;
-  private header: Header;
+  data: Uint8Array;
+  headerSize: number;
+  rawHeader: string;
+  header: Header;
 
   constructor(data: Uint8Array) {
     this.data = data;
@@ -33,20 +33,15 @@ export class Asar {
     return headerBuf.toString();
   }
 
-  isDirectory(...args: Parameters<Header["isDirectory"]>) {
-    return this.header.isDirectory(...args);
-  }
-
-  isFile(...args: Parameters<Header["isFile"]>) {
-    return this.header.isFile(...args);
-  }
-
   readFile(path: Entry | string) {
-    const offset = this.header.getRealFileOffset(path);
+    const entry = path instanceof Entry ? path : this.header.getFromPath(path);
 
-    if (offset == null) {
-      return null;
+    if (!Entry.isFile(entry)) {
+      console.error(entry);
+      throw new Error("[Asar.readFile] Entry is not a file: " + path);
     }
+
+    const offset = entry.getFileOffsetFromAsar(this);
 
     const size = this.data.subarray(offset, offset + 8);
     const pickle = createFromBuffer(size);
@@ -73,87 +68,107 @@ export interface DirectoryEntryData {
 export type EntryData = FileEntryData | DirectoryEntryData;
 
 export class Entry {
-  private data: EntryData;
+  data: EntryData;
 
   constructor(data: EntryData) {
     this.data = data;
   }
 
-  getFromPath(path: Entry | string) {
-    if (path instanceof Entry) {
-      return path.data;
+  static fromData(data: EntryData) {
+    if (this.isDirectoryData(data)) {
+      return new DirectoryEntry(data);
+    } else if (this.isFileData(data)) {
+      return new FileEntry(data);
+    } else {
+      throw new Error("[Entry.fromData] Unknown entry type");
     }
-
-    path = normalizePath(path);
-    const chunks = path.split("/");
-
-    let currentEntry = this.data;
-
-    for (let _i in chunks) {
-      const i = parseInt(_i);
-      const chunk = chunks[i];
-
-      if (!("files" in currentEntry)) {
-        return null;
-      }
-
-      const nextEntry = currentEntry.files[chunk];
-
-      if (!nextEntry) {
-        return null;
-      }
-      currentEntry = nextEntry;
-
-      if (i == chunks.length - 1) {
-        return currentEntry;
-      }
-    }
-
-    return null;
   }
 
-  isDirectory(path: Entry | string) {
-    const entry = this.getFromPath(path);
-
-    return !!(entry && "files" in entry);
+  static isDirectoryData(
+    entryData: EntryData
+  ): entryData is DirectoryEntryData {
+    return "files" in entryData;
   }
 
-  isFile(path: Entry | string) {
-    const entry = this.getFromPath(path);
-
-    return !!(entry && "size" in entry);
+  static isFileData(entryData: EntryData): entryData is FileEntryData {
+    return "size" in entryData;
   }
 
-  getFileOffset(path: Entry | string) {
-    const entry = this.getFromPath(path);
+  static isDirectory(entry: Entry): entry is DirectoryEntry {
+    return this.isDirectoryData(entry.data);
+  }
 
-    if (!entry) {
-      return null;
-    }
-
-    if (!("offset" in entry)) {
-      return null;
-    }
-
-    return parseInt(entry.offset);
+  static isFile(entry: Entry): entry is FileEntry {
+    return this.isFileData(entry.data);
   }
 }
 
-export class Header extends Entry {
+export class FileEntry extends Entry {
+  declare data: FileEntryData;
+
+  constructor(data: FileEntryData) {
+    super(data);
+  }
+
+  getFileOffset() {
+    return parseInt(this.data.offset);
+  }
+
+  getFileOffsetFromAsar(asar: Asar) {
+    return this.getFileOffset() + headerMetadata.end(asar.headerSize) - 7;
+  }
+}
+
+export class DirectoryEntry extends Entry {
+  declare data: DirectoryEntryData;
+
+  constructor(data: DirectoryEntryData) {
+    super(data);
+  }
+
+  getFromPath(path: string) {
+    path = normalizePath(path);
+    const chunks = [...path.split("/"), null];
+
+    let currentEntry: EntryData = this.data;
+
+    for (let _i in chunks) {
+      const i = parseInt(_i);
+      const isLastChunk = i == chunks.length - 1;
+
+      if (isLastChunk) {
+        return Entry.fromData(currentEntry);
+      } else {
+        const chunk = chunks[i]!;
+
+        // Intermediate entries must be directories
+        if (!Entry.isDirectoryData(currentEntry)) {
+          throw new Error(
+            "[DirectoryEntry.getFromPath] Intermediate entry is not a directory"
+          );
+        }
+
+        const nextEntry: EntryData | undefined = currentEntry.files[chunk];
+
+        if (nextEntry == undefined) {
+          throw new Error(
+            "[DirectoryEntry.getFromPath] Intermediate entry not found"
+          );
+        }
+
+        currentEntry = nextEntry;
+      }
+    }
+
+    throw new Error("[DirectoryEntry.getFromPath] Unreachable");
+  }
+}
+
+export class Header extends DirectoryEntry {
   size: number;
 
   constructor(rawHeader: string) {
     super(JSON.parse(rawHeader));
     this.size = rawHeader.length;
-  }
-
-  getRealFileOffset(path: Entry | string) {
-    const offset = this.getFileOffset(path);
-
-    if (!offset) {
-      return null;
-    }
-
-    return offset + headerMetadata.end(this.size) + 2;
   }
 }
