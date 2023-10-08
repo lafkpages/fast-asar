@@ -50,7 +50,7 @@ test("readFile", async () => {
 
   expect(packageJson).toBeString();
 
-  await writeFile("test/ignore/package.json", packageJson!);
+  await writeFile("test/ignore/asar-package.json", packageJson!);
 
   expect(packageJson?.[0]).toBe("{");
 });
