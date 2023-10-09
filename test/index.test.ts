@@ -150,6 +150,8 @@ test("Asar.readFile [dist/main.js]", async () => {
   expect(packageMain).toBeString();
 
   await writeFile("test/ignore/asar-main.js", packageMain!);
+
+  expect(packageMain).toInclude("replit.com");
 });
 
 test("Asar.writeFile [foo.txt]", () => {
