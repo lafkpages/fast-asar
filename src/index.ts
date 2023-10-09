@@ -1,5 +1,5 @@
 import { normalize as normalizePath } from "path";
-import { createFromBuffer } from "@tybys/chromium-pickle-js";
+import { createFromBuffer, createEmpty } from "@tybys/chromium-pickle-js";
 
 export class Asar {
   data: Uint8Array;
@@ -70,9 +70,13 @@ export class Asar {
     return dataBuf;
   }
 
-  writeFile(path: string, data: Uint8Array) {
+  writeFile(path: string, data: string | Uint8Array) {
     path = normalizePath(path);
     // TODO: split into chunks
+
+    if (typeof data == "string") {
+      data = Buffer.from(data, "utf-8");
+    }
 
     this.header.data.files[path] = {
       size: data.length,
@@ -152,6 +156,10 @@ export class FileEntry extends Entry {
   }
 }
 
+export interface ListFilesOptions {
+  recursive: boolean;
+}
+
 export class DirectoryEntry extends Entry {
   declare data: DirectoryEntryData;
 
@@ -196,8 +204,40 @@ export class DirectoryEntry extends Entry {
     throw new Error("[DirectoryEntry.getFromPath] Unreachable");
   }
 
-  listFiles() {
-    return Object.keys(this.data.files);
+  listFiles(opts: Partial<ListFilesOptions> = {}, _path = "") {
+    const files: string[] = [];
+
+    const realOpts: ListFilesOptions = {
+      recursive: false,
+      ...opts,
+    };
+
+    for (let filename in this.data.files) {
+      const absPath = _path + "/" + filename;
+
+      const entry = this.data.files[filename]!;
+
+      if (Entry.isFileData(entry)) {
+        files.push(absPath);
+      } else if (Entry.isDirectoryData(entry)) {
+        if (realOpts.recursive) {
+          const dir = this.getFromPath(filename);
+          if (!Entry.isDirectory(dir)) {
+            throw new Error(
+              "[DirectoryEntry.listFiles] Intermediate entry is not a directory"
+            );
+          }
+          const subFiles = dir.listFiles(realOpts, absPath);
+          files.push(...subFiles);
+        } else {
+          files.push(absPath);
+        }
+      } else {
+        throw new Error("[DirectoryEntry.listFiles] Unknown entry type");
+      }
+    }
+
+    return files;
   }
 }
 
@@ -211,5 +251,15 @@ export class Header extends DirectoryEntry {
 
   getRawData() {
     return JSON.stringify(this.data);
+  }
+
+  getRawAsarData() {
+    const headerJsonData = this.getRawData();
+    const headerPickle = createEmpty();
+    headerPickle.writeString(headerJsonData); // TODO: check return val
+
+    const headerSizePickle = createEmpty();
+    headerSizePickle.writeInt(headerJsonData.length);
+    const headerSizeData = headerSizePickle.toBuffer(); // TODO: ^^
   }
 }

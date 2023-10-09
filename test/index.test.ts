@@ -47,6 +47,17 @@ test("Header.listFiles", () => {
   console.log("Files: ", files);
 });
 
+test("Header.listFiles [recursive]", () => {
+  const files = asar.header.listFiles({
+    recursive: true,
+  });
+
+  expect(files).toBeArray();
+  expect(files).not.toBeEmpty();
+
+  console.log("Files: ", files);
+});
+
 test("Entry.isFile", () => {
   expect(Entry.isFile(packageJsonEntry)).toBeTrue();
 });
@@ -77,7 +88,7 @@ test("Asar.writeFile [foo.txt]", () => {
   const data = "Hello, world!";
 
   asar.writeFile("foo.txt", data);
-})
+});
 
 // Save modified ASAR
 test("Save ASAR", async () => {
