@@ -84,6 +84,14 @@ test("Header.listFiles [recursive]", async () => {
   expect(files).toContain("dist/main.js");
   expect(files).toContain("dist/preload.js");
   expect(files).toContain("node_modules/.pnpm/lock.yaml");
+
+  const uniqueFiles = [...new Set(files)];
+
+  expect(uniqueFiles).toBeArray();
+  expect(uniqueFiles).not.toBeEmpty();
+
+  // Check for duplicates
+  expect(files.length).toBe(uniqueFiles.length);
 });
 
 test("Header.listFiles [recursive, chunks]", async () => {
