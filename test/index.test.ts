@@ -3,6 +3,8 @@ import { test, expect } from "bun:test";
 import { Asar, Entry, Header } from "../src";
 import { readFile, writeFile } from "fs/promises";
 
+import { normalize as normalizePath } from "path";
+
 const asarData = await readFile("test/ignore/app.asar");
 let asar: Asar;
 
@@ -123,6 +125,23 @@ test("Asar.readFile [package.json]", async () => {
   await writeFile("test/ignore/asar-package.json", packageJson!);
 
   expect(packageJson[0]).toBe("{");
+
+  const packageJsonData = JSON.parse(packageJson);
+
+  expect(packageJsonData).toBeTruthy();
+  expect(packageJsonData).not.toBeBoolean();
+  expect(packageJsonData).not.toBeNumber();
+  expect(packageJsonData).not.toBeString();
+  expect(packageJsonData).not.toBeArray();
+  expect(packageJsonData).not.toBeFunction();
+  expect(packageJsonData).not.toBeSymbol();
+  expect(packageJsonData.name).toBeString();
+  expect(packageJsonData.version).toBeString();
+  expect(packageJsonData.main).toBeString();
+
+  const packageJsonNormalizedEntrypoint = normalizePath(packageJsonData.main);
+  expect(packageJsonNormalizedEntrypoint).toBeString();
+  expect(packageJsonNormalizedEntrypoint).toBe("dist/main.js");
 });
 
 test("Asar.readFile [dist/main.js]", async () => {
