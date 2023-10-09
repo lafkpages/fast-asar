@@ -158,6 +158,7 @@ export class FileEntry extends Entry {
 
 export interface ListFilesOptions {
   recursive: boolean;
+  chunks?: boolean;
 }
 
 export class DirectoryEntry extends Entry {
@@ -205,15 +206,18 @@ export class DirectoryEntry extends Entry {
   }
 
   listFiles(opts: Partial<ListFilesOptions> = {}, _path = "") {
-    const files: string[] = [];
+    const files: string[] | string[][] = [];
 
     const realOpts: ListFilesOptions = {
       recursive: false,
+      chunks: false,
       ...opts,
     };
 
     for (let filename in this.data.files) {
-      const absPath = _path + "/" + filename;
+      const absPath = realOpts.chunks
+        ? [..._path, filename]
+        : _path + "/" + filename;
 
       const entry = this.data.files[filename]!;
 

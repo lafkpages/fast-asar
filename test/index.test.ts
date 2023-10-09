@@ -37,25 +37,46 @@ test("Header.getFromPath", () => {
   expect(packageJsonEntry).toBeInstanceOf(Entry);
 });
 
-test("Header.listFiles", () => {
+test("Header.listFiles", async () => {
   const files = asar.header.listFiles();
+
+  await writeFile(
+    "test/ignore/asar-files.json",
+    JSON.stringify(files, null, 2)
+  );
 
   expect(files).toBeArray();
   expect(files).not.toBeEmpty();
   expect(files).toContain("package.json");
-
-  console.log("Files: ", files);
 });
 
-test("Header.listFiles [recursive]", () => {
+test("Header.listFiles [recursive]", async () => {
   const files = asar.header.listFiles({
     recursive: true,
   });
 
+  await writeFile(
+    "test/ignore/asar-files-recursive.json",
+    JSON.stringify(files, null, 2)
+  );
+
   expect(files).toBeArray();
   expect(files).not.toBeEmpty();
+});
 
-  console.log("Files: ", files);
+test("Header.listFiles [recursive, chunks]", async () => {
+  const files = asar.header.listFiles({
+    recursive: true,
+    chunks: true,
+  });
+
+  await writeFile(
+    "test/ignore/asar-files-recursive-chunks.json",
+    JSON.stringify(files, null, 2)
+  );
+
+  expect(files).toBeArray();
+  expect(files).not.toBeEmpty();
 });
 
 test("Entry.isFile", () => {
