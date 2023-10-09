@@ -107,6 +107,14 @@ test("Entry.isDirectory", () => {
   expect(Entry.isDirectory(packageJsonEntry)).toBeFalse();
 });
 
+test("Entry.isFileData", () => {
+  expect(Entry.isFileData(packageJsonEntry.data)).toBeTrue();
+});
+
+test("Entry.isDirectoryData", () => {
+  expect(Entry.isDirectoryData(packageJsonEntry.data)).toBeFalse();
+});
+
 test("Asar.readFile [package.json]", async () => {
   const packageJson = asar.readFile("package.json").toString();
 
