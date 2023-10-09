@@ -205,7 +205,10 @@ export class DirectoryEntry extends Entry {
     throw new Error("[DirectoryEntry.getFromPath] Unreachable");
   }
 
-  listFiles(opts: Partial<ListFilesOptions> = {}, _path = "") {
+  listFiles(
+    opts: Partial<ListFilesOptions> = {},
+    _path: string | string[] | null = null
+  ) {
     const files: string[] | string[][] = [];
 
     const realOpts: ListFilesOptions = {
@@ -216,7 +219,9 @@ export class DirectoryEntry extends Entry {
 
     for (let filename in this.data.files) {
       const absPath = realOpts.chunks
-        ? [..._path, filename]
+        ? [...(_path ?? []), filename]
+        : _path == null
+        ? filename
         : _path + "/" + filename;
 
       const entry = this.data.files[filename]!;
