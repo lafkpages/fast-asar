@@ -72,3 +72,14 @@ test("Asar.readFile [dist/main.js]", async () => {
 
   await writeFile("test/ignore/asar-main.js", packageMain!);
 });
+
+test("Asar.writeFile [foo.txt]", () => {
+  const data = "Hello, world!";
+
+  asar.writeFile("foo.txt", data);
+})
+
+// Save modified ASAR
+test("Save ASAR", async () => {
+  await writeFile("test/ignore/app.asar", asar.data);
+});

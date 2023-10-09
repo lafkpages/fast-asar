@@ -76,6 +76,21 @@ export class Asar {
 
     return dataBuf;
   }
+
+  writeFile(path: string, data: Uint8Array) {
+    path = normalizePath(path);
+    // TODO: split into chunks
+
+    this.header.data.files[path] = {
+      size: data.length,
+      offset: (this.data.length - this.headerSize - 8).toString(),
+    };
+
+    const newData = new Uint8Array(this.data.length + data.length);
+    newData.set(this.data);
+    newData.set(data, this.data.length);
+    this.data = newData;
+  };
 }
 
 export interface FileEntryData {
