@@ -208,4 +208,8 @@ export class Header extends DirectoryEntry {
     super(JSON.parse(rawHeader));
     this.size = rawHeader.length;
   }
+
+  getRawData() {
+    return JSON.stringify(this.data);
+  }
 }
