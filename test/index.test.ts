@@ -48,6 +48,8 @@ test("Header.listFiles", async () => {
   expect(files).toBeArray();
   expect(files).not.toBeEmpty();
   expect(files).toContain("package.json");
+  expect(files).toContain("dist");
+  expect(files).toContain("node_modules");
 });
 
 test("Header.listFiles [chunks]", async () => {
