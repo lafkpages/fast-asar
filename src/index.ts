@@ -1,5 +1,4 @@
 import { normalize as normalizePath } from "path";
-import { headerSizeMetadata, headerMetadata } from "./consts";
 import { createFromBuffer } from "@tybys/chromium-pickle-js";
 
 export class Asar {
@@ -45,19 +44,13 @@ export class Asar {
   }
 
   private readHeaderSize() {
-    const headerSizeBuf = this.data.subarray(
-      headerSizeMetadata.start,
-      headerSizeMetadata.end
-    );
+    const headerSizeBuf = this.data.subarray(8, 16);
     const headerSizePickle = createFromBuffer(headerSizeBuf);
     return headerSizePickle.createIterator().readInt();
   }
 
   private readHeader() {
-    const headerBuf = this.data.subarray(
-      headerMetadata.start,
-      headerMetadata.end(this.headerSize)
-    );
+    const headerBuf = this.data.subarray(16, 7 + this.headerSize);
     return headerBuf.toString();
   }
 
@@ -90,7 +83,7 @@ export class Asar {
     newData.set(this.data);
     newData.set(data, this.data.length);
     this.data = newData;
-  };
+  }
 }
 
 export interface FileEntryData {
@@ -155,7 +148,7 @@ export class FileEntry extends Entry {
   }
 
   getFileOffsetFromAsar(asar: Asar) {
-    return this.getFileOffset() + headerMetadata.end(asar.headerSize) + 2;
+    return this.getFileOffset() + 8 + asar.headerSize;
   }
 }
 
