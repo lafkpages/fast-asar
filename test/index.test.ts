@@ -78,6 +78,10 @@ test("Header.listFiles [recursive]", async () => {
 
   expect(files).toBeArray();
   expect(files).not.toBeEmpty();
+  expect(files).toContain("package.json");
+  expect(files).toContain("dist/main.js");
+  expect(files).toContain("dist/preload.js");
+  expect(files).toContain("node_modules/.pnpm/lock.yaml");
 });
 
 test("Header.listFiles [recursive, chunks]", async () => {
