@@ -50,6 +50,20 @@ test("Header.listFiles", async () => {
   expect(files).toContain("package.json");
 });
 
+test("Header.listFiles [chunks]", async () => {
+  const files = asar.header.listFiles({
+    chunks: true,
+  });
+
+  await writeFile(
+    "test/ignore/asar-files-chunks.json",
+    JSON.stringify(files, null, 2)
+  );
+
+  expect(files).toBeArray();
+  expect(files).not.toBeEmpty();
+});
+
 test("Header.listFiles [recursive]", async () => {
   const files = asar.header.listFiles({
     recursive: true,
