@@ -158,7 +158,8 @@ export class FileEntry extends Entry {
 
 export interface ListFilesOptions {
   recursive: boolean;
-  chunks?: boolean;
+  recursiveIncludeDirectories: boolean;
+  chunks: boolean;
 }
 
 export class DirectoryEntry extends Entry {
@@ -213,6 +214,7 @@ export class DirectoryEntry extends Entry {
 
     const realOpts: ListFilesOptions = {
       recursive: false,
+      recursiveIncludeDirectories: true,
       chunks: false,
       ...opts,
     };
@@ -237,6 +239,7 @@ export class DirectoryEntry extends Entry {
             );
           }
           const subFiles = dir.listFiles(realOpts, absPath);
+          files.push(absPath);
           files.push(...subFiles);
         } else {
           files.push(absPath);
