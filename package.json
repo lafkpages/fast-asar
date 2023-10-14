@@ -13,6 +13,9 @@
   "dependencies": {
     "@tybys/chromium-pickle-js": "^1.0.0"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "bun scripts/build.ts",
     "build:docs": "typedoc src/index.ts",
