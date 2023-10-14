@@ -95,6 +95,10 @@ export class Asar extends DirectoryEntry {
     const entry = BaseEntry.isEntry(path) ? path : this.getFromPath(path);
 
     if (BaseEntry.isFile(entry)) {
+      if (entry.data == undefined) {
+        throw new Error("[Asar.readFile] File data not found");
+      }
+
       return entry.data;
     }
 
