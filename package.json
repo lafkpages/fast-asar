@@ -17,7 +17,7 @@
     "build": "bun scripts/build.ts",
     "build:docs": "typedoc src/index.ts",
     "build:types": "tsc",
-    "pretest": "bun scripts/cleanup-test-data.ts",
+    "pretest": "bun scripts/cleanupTestData.ts",
     "test": "bun test"
   }
 }
