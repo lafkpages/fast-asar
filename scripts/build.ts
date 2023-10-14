@@ -1,3 +1,5 @@
+import "typescript/lib/tsc";
+
 import { rm } from "fs/promises";
 
 const outdir = "dist";
