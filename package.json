@@ -4,12 +4,19 @@
   "type": "module",
   "devDependencies": {
     "@electron/asar": "^3.2.7",
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "typedoc": "^0.25.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
     "@tybys/chromium-pickle-js": "^1.0.0"
+  },
+  "scripts": {
+    "build": "bun scripts/build.ts",
+    "build:docs": "typedoc src/index.ts",
+    "pretest": "bun scripts/cleanup-test-data.ts",
+    "test": "bun test"
   }
 }
