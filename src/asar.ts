@@ -113,19 +113,54 @@ export class Asar extends DirectoryEntry {
     return bytes.subarray(offset, offset + size);
   }
 
-  writeFile(path: string, data: string | Uint8Array) {
-    path = normalizePath(path);
-    // TODO: split into chunks
+  writeFile(
+    path: string | string[],
+    data: string | Uint8Array,
+    createDirs = false
+  ) {
+    if (typeof path == "string") {
+      path = normalizePath(path).split("/");
+    }
 
     if (typeof data == "string") {
       data = Buffer.from(data, "utf-8");
     }
 
-    this.files[path] = {
-      size: data.length,
-      offset: "",
-      data,
-    };
+    // Save the file data to its entry in this.files
+    let currentDir = this.files;
+    for (const _pathChunkIndex in path) {
+      const pathChunkIndex = parseInt(_pathChunkIndex);
+      const pathChunk = path[pathChunkIndex];
+      const isLastChunk = pathChunkIndex == path.length - 1;
+
+      if (!(pathChunk in currentDir)) {
+        if (isLastChunk) {
+          currentDir[pathChunk]! = {
+            data,
+            size: data.length,
+            offset: "",
+          };
+          return;
+        } else if (createDirs) {
+          currentDir[pathChunk] = {
+            files: {},
+          };
+        } else {
+          throw new Error(
+            "[new Asar] File entry not found in directory structure"
+          );
+        }
+      }
+
+      if (isLastChunk) {
+        // This is the last chunk, so we can assume it's a file
+        (currentDir[pathChunk] as FileEntryData).data = data;
+        (currentDir[pathChunk] as FileEntryData).size = data.length;
+        (currentDir[pathChunk] as FileEntryData).offset = "";
+      }
+
+      currentDir = (currentDir[pathChunk] as DirectoryEntryData).files;
+    }
   }
 
   getData(opts: Partial<AsarGetDataOptions> = {}) {

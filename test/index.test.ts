@@ -156,6 +156,12 @@ test("Asar.writeFile [foo.txt]", () => {
   asar.writeFile("foo.txt", data);
 });
 
+test("Asar.writeFile [foo/bar.txt]", () => {
+  const data = "Hello, world! (again)";
+
+  asar.writeFile("foo/bar.txt", data, true);
+});
+
 // Save modified ASAR
 test("Asar.getData", async () => {
   const {
