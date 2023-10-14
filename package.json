@@ -12,5 +12,8 @@
   },
   "dependencies": {
     "@tybys/chromium-pickle-js": "^1.0.0"
+  },
+  "scripts": {
+    "build:docs": "typedoc src/index.ts"
   }
 }
