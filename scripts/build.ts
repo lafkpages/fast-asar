@@ -1,16 +1,15 @@
-import "typescript/lib/tsc";
+// Build types
+const tsc = Bun.spawn(["./node_modules/.bin/tsc"]);
+await tsc.exited;
 
-import { rm } from "fs/promises";
-
-const outdir = "dist";
-
-await rm(outdir, { recursive: true, force: true });
-
+// Build the project
 await Bun.build({
   entrypoints: ["src/index.ts"],
+  root: "src",
   target: "node",
   minify: true,
   sourcemap: "external",
-  outdir,
-  splitting: true,
+  outdir: "dist",
 });
+
+export {};
