@@ -33,6 +33,8 @@ export class Asar extends DirectoryEntry {
       .readUInt32();
 
     // Read header
+    // We start at 16 because 0-8 are the Pickle object containing
+    // the header size, and 9-15 are the header size itself
     const rawHeader = asarBytes.subarray(16, headerSize + 16).toString();
     const header = JSON.parse(rawHeader) as unknown;
 
