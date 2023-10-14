@@ -189,12 +189,16 @@ export class Asar extends DirectoryEntry {
 
     const headerDataStr = JSON.stringify(headerData);
     const headerPickle = createEmpty();
-    headerPickle.writeString(headerDataStr); // TODO: check return val
+    if (!headerPickle.writeString(headerDataStr)) {
+      throw new Error("[Asar.getData] Failed to write header data to Pickle");
+    }
     const headerDataBuf = headerPickle.toBuffer();
 
     const headerSizePickle = createEmpty();
-    headerSizePickle.writeUInt32(headerDataStr.length + 9);
-    const headerSizeDataBuf = headerSizePickle.toBuffer(); // TODO: ^^
+    if (!headerSizePickle.writeUInt32(headerDataStr.length + 9)) {
+      throw new Error("[Asar.getData] Failed to write header size to Pickle");
+    }
+    const headerSizeDataBuf = headerSizePickle.toBuffer();
 
     const bufs = [headerSizeDataBuf, headerDataBuf];
 
