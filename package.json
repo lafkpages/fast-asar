@@ -4,7 +4,8 @@
   "type": "module",
   "devDependencies": {
     "@electron/asar": "^3.2.7",
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "typedoc": "^0.25.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
