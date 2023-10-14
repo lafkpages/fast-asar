@@ -30,7 +30,7 @@ export class Asar extends DirectoryEntry {
     // Read header size
     const headerSize = createFromBuffer(asarBytes.subarray(0, 16))
       .createIterator()
-      .readInt();
+      .readUInt32();
 
     // Read header
     const rawHeader = asarBytes.subarray(16, headerSize + 16).toString();
