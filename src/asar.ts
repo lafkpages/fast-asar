@@ -215,12 +215,6 @@ export class Asar extends DirectoryEntry {
           throw new Error("[Asar.getData] File size mismatch");
         }
 
-        // const realOffset =
-        //   parseInt(fileEntry.offset) +
-        //   headerSizeDataBuf.length +
-        //   headerDataBuf.length +
-        //   1;
-
         bufs.push(fileDataBuf);
       }
     }
