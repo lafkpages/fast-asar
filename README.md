@@ -12,5 +12,6 @@ You can get this file by installing the Replit Desktop app and copying the `app.
 Then, to run all tests:
 
 ```sh
+bun pretest
 bun test
 ```
