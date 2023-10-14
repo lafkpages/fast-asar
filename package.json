@@ -3,6 +3,7 @@
   "module": "src/index.ts",
   "type": "module",
   "devDependencies": {
+    "@electron/asar": "^3.2.7",
     "bun-types": "latest"
   },
   "peerDependencies": {

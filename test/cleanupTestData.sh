@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-rm test/ignore/*.{js,json}
+rm -f test/ignore/*.{js,json,txt}
+rm -f test/ignore/app-*.asar

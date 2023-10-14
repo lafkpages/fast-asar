@@ -1,46 +1,66 @@
 import { test, expect } from "bun:test";
 
-import { Asar, Entry, Header } from "../src";
-import { readFile, writeFile } from "fs/promises";
+import { Asar, BaseEntry } from "../src";
 
+import { readFile, writeFile } from "fs/promises";
 import { normalize as normalizePath } from "path";
+
+import type { FileEntryData } from "../src/types/entries";
 
 const asarData = await readFile("test/ignore/app.asar");
 let asar: Asar;
 
 // This test assumes that the ASAR file given belongs
-// to an Electron app, and has a package.json file.
+// to the Replit Desktop app, and has a package.json file.
 
 test("new Asar", () => {
-  asar = new Asar(asarData);
+  asar = new Asar(asarData, {
+    storeInitialParseData: true,
+  });
 
+  expect(asar).toBeDefined();
   expect(asar).toBeInstanceOf(Asar);
 });
 
-test("Asar.headerSize", () => {
-  expect(asar.headerSize).toBeNumber();
+test("Asar.initialParseData.headerSize", async () => {
+  expect(asar.initialParseData?.headerSize).toBeNumber();
+  // Now we can "!" assert it
+
+  await writeFile(
+    "test/ignore/asar-header-size.txt",
+    asar.initialParseData!.headerSize.toString()
+  );
 });
 
-test("Asar.rawHeader", () => {
-  expect(asar.rawHeader).toBeString();
+test("Asar.initialParseData.rawHeader ", async () => {
+  expect(asar.initialParseData?.rawHeader).toBeString();
+  // Now we can "!" assert it
 
-  writeFile("test/ignore/asar-header.json", asar.rawHeader);
+  await writeFile(
+    "test/ignore/asar-header-raw.json",
+    asar.initialParseData!.rawHeader
+  );
 });
 
-test("Asar.header", () => {
-  expect(asar.header).toBeInstanceOf(Header);
+test("Asar.initialParseData.header    ", () => {
+  const header = asar.initialParseData?.header;
+
+  expect(header).toBeDefined();
+  // Now we can "!" assert it
+
+  expect(BaseEntry.isDirectory(asar.initialParseData!.header)).toBeTrue();
 });
 
-let packageJsonEntry: Entry;
+let packageJsonEntry: BaseEntry;
 
 test("Header.getFromPath", () => {
-  packageJsonEntry = asar.header.getFromPath("package.json");
+  packageJsonEntry = asar.getFromPath("package.json");
 
-  expect(packageJsonEntry).toBeInstanceOf(Entry);
+  expect(packageJsonEntry).toBeInstanceOf(BaseEntry);
 });
 
-test("Header.listFiles", async () => {
-  const files = asar.header.listFiles();
+test("Header.listFiles  ", async () => {
+  const files = asar.listFiles();
 
   await writeFile(
     "test/ignore/asar-files.json",
@@ -54,87 +74,54 @@ test("Header.listFiles", async () => {
   expect(files).toContain("node_modules");
 });
 
-test("Header.listFiles [chunks]", async () => {
-  const files = asar.header.listFiles({
-    chunks: true,
-  });
+test("Header.walkFiles  ", async () => {
+  const files = [...asar.walkFiles()];
+  const filesWithoutEntries = files.map((file) => [file[0], file[1]]);
 
   await writeFile(
-    "test/ignore/asar-files-chunks.json",
-    JSON.stringify(files, null, 2)
+    "test/ignore/asar-walk-files.json",
+    JSON.stringify(filesWithoutEntries, null, 2)
   );
 
   expect(files).toBeArray();
   expect(files).not.toBeEmpty();
+  // expect(files).toContain("package.json");
+  // expect(files).toContain("dist");
+  // expect(files).toContain("node_modules");
+
+  expect(filesWithoutEntries).toBeArray();
+  expect(filesWithoutEntries).not.toBeEmpty();
 });
 
-test("Header.listFiles [recursive]", async () => {
-  const files = asar.header.listFiles({
-    recursive: true,
-  });
-
-  await writeFile(
-    "test/ignore/asar-files-recursive.json",
-    JSON.stringify(files, null, 2)
-  );
-
-  expect(files).toBeArray();
-  expect(files).not.toBeEmpty();
-  expect(files).toContain("package.json");
-  expect(files).toContain("dist/main.js");
-  expect(files).toContain("dist/preload.js");
-  expect(files).toContain("node_modules/.pnpm/lock.yaml");
-
-  const uniqueFiles = [...new Set(files)];
-
-  expect(uniqueFiles).toBeArray();
-  expect(uniqueFiles).not.toBeEmpty();
-
-  // Check for duplicates
-  expect(files.length).toBe(uniqueFiles.length);
+test("Entry.isFile \t\t[entry]", () => {
+  expect(BaseEntry.isFile(packageJsonEntry)).toBeTrue();
 });
 
-test("Header.listFiles [recursive, chunks]", async () => {
-  const files = asar.header.listFiles({
-    recursive: true,
-    chunks: true,
-  });
-
-  await writeFile(
-    "test/ignore/asar-files-recursive-chunks.json",
-    JSON.stringify(files, null, 2)
-  );
-
-  expect(files).toBeArray();
-  expect(files).not.toBeEmpty();
+test("Entry.isDirectory \t[entry]", () => {
+  expect(BaseEntry.isDirectory(packageJsonEntry)).toBeFalse();
 });
 
-test("Entry.isFile", () => {
-  expect(Entry.isFile(packageJsonEntry)).toBeTrue();
+test("Entry.isFile \t\t[data] ", () => {
+  expect(BaseEntry.isFile(packageJsonEntry)).toBeTrue();
 });
 
-test("Entry.isDirectory", () => {
-  expect(Entry.isDirectory(packageJsonEntry)).toBeFalse();
+test("Entry.isDirectory \t[data] ", () => {
+  expect(BaseEntry.isDirectory(packageJsonEntry)).toBeFalse();
 });
 
-test("Entry.isFileData", () => {
-  expect(Entry.isFileData(packageJsonEntry.data)).toBeTrue();
-});
-
-test("Entry.isDirectoryData", () => {
-  expect(Entry.isDirectoryData(packageJsonEntry.data)).toBeFalse();
-});
-
-test("Asar.readFile [package.json]", async () => {
-  const packageJson = asar.readFile("package.json").toString();
+test("Asar.readFile [package.json] ", async () => {
+  const packageJson = asar.readFile("package.json")?.toString();
 
   expect(packageJson).toBeString();
+  // Now we can "!" assert it
+
+  expect(packageJson).not.toBeEmpty();
 
   await writeFile("test/ignore/asar-package.json", packageJson!);
 
-  expect(packageJson[0]).toBe("{");
+  expect(packageJson![0]).toBe("{");
 
-  const packageJsonData = JSON.parse(packageJson);
+  const packageJsonData = JSON.parse(packageJson!);
 
   expect(packageJsonData).toBeTruthy();
   expect(packageJsonData).not.toBeBoolean();
@@ -152,10 +139,11 @@ test("Asar.readFile [package.json]", async () => {
   expect(packageJsonNormalizedEntrypoint).toBe("dist/main.js");
 });
 
-test("Asar.readFile [dist/main.js]", async () => {
-  const packageMain = asar.readFile("dist/main.js").toString();
+test("Asar.readFile [dist/main.js] ", async () => {
+  const packageMain = asar.readFile("dist/main.js")?.toString();
 
   expect(packageMain).toBeString();
+  // Now we can "!" assert it
 
   await writeFile("test/ignore/asar-main.js", packageMain!);
 
@@ -169,6 +157,45 @@ test("Asar.writeFile [foo.txt]", () => {
 });
 
 // Save modified ASAR
-test("Save ASAR", async () => {
-  await writeFile("test/ignore/app.asar", asar.data);
+test("Asar.getData", async () => {
+  const {
+    bytes: asarData,
+    rawHeader,
+    rawHeaderSize,
+    header,
+  } = asar.getData({
+    returnRawHeader: true,
+    returnRawHeaderSize: true,
+    returnHeader: true,
+  });
+
+  await writeFile("test/ignore/app-getData.asar", asarData);
+  await writeFile("test/ignore/app-getData-header.json", rawHeader!);
+  await writeFile(
+    "test/ignore/app-getData-headerSize.txt",
+    rawHeaderSize!.toString()
+  );
+  // TODO: getData should have an overload so that
+  // we don't need to "!" assert rawHeader
+
+  expect(asarData).toBeInstanceOf(Uint8Array);
+  expect(asarData).not.toBeEmpty();
+
+  expect(rawHeader).toBeString();
+  expect(rawHeader).not.toBeEmpty();
+  expect(rawHeader![0]).toBe("{");
+
+  expect(rawHeaderSize).toBeNumber();
+  expect(rawHeaderSize).toBe(rawHeader!.length);
+
+  expect(header).toBeDefined();
+  expect(header).not.toBeEmpty();
+  expect(BaseEntry.isDirectory(header!)).toBeTrue();
+  expect(header!.files).toBeDefined();
+  expect(header!.files).not.toBeEmpty();
+  expect(header!.files["package.json"]).toBeDefined();
+  expect(BaseEntry.isFile(header!.files["package.json"]!)).toBeTrue();
+  expect((header!.files["package.json"] as FileEntryData).size).toBeNumber();
+  expect((header!.files["package.json"] as FileEntryData).offset).toBeString();
+  expect((header!.files["package.json"] as FileEntryData).data).toBeUndefined();
 });
