@@ -110,18 +110,17 @@ test("Entry.isDirectory \t[data] ", () => {
 });
 
 test("Asar.readFile [package.json] ", async () => {
-  const packageJson = asar.readFile("package.json")?.toString();
+  const packageJson = asar.readFile("package.json").toString();
 
   expect(packageJson).toBeString();
-  // Now we can "!" assert it
 
   expect(packageJson).not.toBeEmpty();
 
-  await writeFile("test/ignore/asar-package.json", packageJson!);
+  await writeFile("test/ignore/asar-package.json", packageJson);
 
-  expect(packageJson![0]).toBe("{");
+  expect(packageJson[0]).toBe("{");
 
-  const packageJsonData = JSON.parse(packageJson!);
+  const packageJsonData = JSON.parse(packageJson);
 
   expect(packageJsonData).toBeTruthy();
   expect(packageJsonData).not.toBeBoolean();
@@ -140,12 +139,11 @@ test("Asar.readFile [package.json] ", async () => {
 });
 
 test("Asar.readFile [dist/main.js] ", async () => {
-  const packageMain = asar.readFile("dist/main.js")?.toString();
+  const packageMain = asar.readFile("dist/main.js").toString();
 
   expect(packageMain).toBeString();
-  // Now we can "!" assert it
 
-  await writeFile("test/ignore/asar-main.js", packageMain!);
+  await writeFile("test/ignore/asar-main.js", packageMain);
 
   expect(packageMain).toInclude("replit.com");
 });
