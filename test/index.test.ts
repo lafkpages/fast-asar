@@ -166,10 +166,12 @@ test("Asar.getData", async () => {
     bytes: asarData,
     rawHeader,
     rawHeaderSize,
+    headerString,
     header,
   } = asar.getData({
     returnRawHeader: true,
     returnRawHeaderSize: true,
+    returnHeaderString: true,
     returnHeader: true,
   });
 
@@ -185,9 +187,12 @@ test("Asar.getData", async () => {
   expect(asarData).toBeInstanceOf(Uint8Array);
   expect(asarData).not.toBeEmpty();
 
-  expect(rawHeader).toBeString();
+  expect(headerString).toBeString();
+  expect(headerString).not.toBeEmpty();
+  expect(headerString![0]).toBe("{");
+
+  expect(rawHeader).toBeInstanceOf(Uint8Array);
   expect(rawHeader).not.toBeEmpty();
-  expect(rawHeader![0]).toBe("{");
 
   expect(rawHeaderSize).toBeNumber();
   expect(rawHeaderSize).toBe(rawHeader!.length);

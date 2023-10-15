@@ -20,6 +20,7 @@ export interface AsarGetDataOptions {
   noRecalculateIntegrity: boolean;
   returnRawHeader: boolean;
   returnRawHeaderSize: boolean;
+  returnHeaderString: boolean;
   returnHeader: boolean;
 }
 
@@ -159,6 +160,7 @@ export class Asar extends DirectoryEntry {
         (currentDir[pathChunk] as FileEntryData).data = data;
         (currentDir[pathChunk] as FileEntryData).size = data.length;
         (currentDir[pathChunk] as FileEntryData).offset = "";
+        return;
       }
 
       currentDir = (currentDir[pathChunk] as DirectoryEntryData).files;
@@ -236,7 +238,7 @@ export class Asar extends DirectoryEntry {
     const headerDataBuf = headerPickle.toBuffer();
 
     const headerSizePickle = createEmpty();
-    if (!headerSizePickle.writeUInt32(headerDataStr.length + 9)) {
+    if (!headerSizePickle.writeUInt32(headerDataBuf.length)) {
       throw new Error("[Asar.getData] Failed to write header size to Pickle");
     }
     const headerSizeDataBuf = headerSizePickle.toBuffer();
@@ -270,15 +272,19 @@ export class Asar extends DirectoryEntry {
 
     const returnValue: {
       bytes: Uint8Array;
-      rawHeader?: string;
+      rawHeader?: Uint8Array;
       rawHeaderSize?: number;
+      headerString?: string;
       header?: DirectoryEntryData;
     } = { bytes: buf };
     if (opts.returnRawHeader) {
-      returnValue.rawHeader = headerDataStr;
+      returnValue.rawHeader = headerDataBuf;
     }
     if (opts.returnRawHeaderSize) {
-      returnValue.rawHeaderSize = headerDataStr.length;
+      returnValue.rawHeaderSize = headerDataBuf.length;
+    }
+    if (opts.returnHeaderString) {
+      returnValue.headerString = headerDataStr;
     }
     if (opts.returnHeader) {
       returnValue.header = headerData;
