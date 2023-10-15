@@ -79,7 +79,7 @@ export class FileEntry extends BaseEntry implements FileEntryData {
 
     const hash = sha256(data);
 
-    const blockSize = 4096 * 1024; // 4 kibibytes
+    const blockSize = 4 * 1024 * 1024; // 4MB
 
     const blocks: string[] = [];
 
