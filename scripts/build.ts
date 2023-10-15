@@ -4,7 +4,7 @@ await tsc.exited;
 
 // Build the project
 await Bun.build({
-  entrypoints: ["src/index.ts"],
+  entrypoints: ["src/index.ts", "src/cli/index.ts"],
   root: "src",
   target: "node",
   minify: true,
