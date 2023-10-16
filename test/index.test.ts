@@ -22,6 +22,18 @@ test("new Asar", () => {
   expect(asar).toBeInstanceOf(Asar);
 });
 
+test("new Asar [empty]", () => {
+  const emptyAsar = new Asar();
+
+  expect(emptyAsar).toBeDefined();
+  expect(emptyAsar).toBeInstanceOf(Asar);
+
+  const files = emptyAsar.listFiles();
+
+  expect(files).toBeArray();
+  expect(files).toBeEmpty();
+});
+
 test("Asar.initialParseData.headerSize", async () => {
   expect(asar.initialParseData?.headerSize).toBeNumber();
   // Now we can "!" assert it
