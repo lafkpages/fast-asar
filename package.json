@@ -1,7 +1,7 @@
 {
   "name": "fast-asar",
   "description": "A faster implementation of Electron's ASAR archive format.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
