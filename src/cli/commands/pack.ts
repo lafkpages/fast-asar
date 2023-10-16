@@ -36,7 +36,14 @@ export default async function pack(...args: string[]) {
 
   const asar = new Asar();
 
-  for await (const [filePath, fileIsDirectory] of walk(input, true)) {
-    console.log(filePath, fileIsDirectory ? "/" : "");
+  for await (const [filePath] of walk(input)) {
+    const fileData = await readFile(joinPaths(input, "..", filePath));
+
+    asar.writeFile(filePath, fileData, true);
   }
+
+  // Save Asar
+  const asarData = asar.getData();
+
+  await writeFile(archive, asarData.bytes);
 }
