@@ -1,10 +1,8 @@
-import { Asar, BaseEntry } from "../..";
+import { Asar } from "../..";
 
-import { readFile, readdir, writeFile, mkdir } from "fs/promises";
+import { readFile, readdir, writeFile } from "fs/promises";
 
-import { join as joinPaths, resolve } from "path";
-
-import type { Dirent } from "fs";
+import { join as joinPaths } from "path";
 
 async function* walk(
   dir: string,
