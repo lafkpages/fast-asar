@@ -4,6 +4,7 @@ import { help } from "./help";
 import { colors, error } from "../log";
 
 import extract from "./commands/extract";
+import list from "./commands/list";
 
 const command = process.argv[2];
 
@@ -13,9 +14,9 @@ if (!command) {
 }
 
 const commands = {
-  extract: extract,
+  extract,
   pack: console.log, // TODO
-  list: console.log, // TODO
+  list,
   help: console.log, // TODO
 };
 type Command = keyof typeof commands;
