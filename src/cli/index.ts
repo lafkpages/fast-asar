@@ -4,6 +4,7 @@ import { help as showHelp } from "./help";
 import { colors, error } from "../log";
 
 import extract from "./commands/extract";
+import pack from "./commands/pack";
 import list from "./commands/list";
 import help from "./commands/help";
 
@@ -16,7 +17,7 @@ if (!command) {
 
 const commands = {
   extract,
-  pack: console.log, // TODO
+  pack,
   list,
   help,
 };
