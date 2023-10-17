@@ -41,6 +41,12 @@ await asar.extract("./app-extracted");
 
 For more information, see the [API documentation](https://lafkpages.github.io/fast-asar/).
 
+## Compatibility
+
+This library can be run with [Node.js](https://nodejs.org) and [Bun](https://bun.sh).
+
+Browser support is planned.
+
 ## Contributing
 
 ### Running tests
