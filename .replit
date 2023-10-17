@@ -8,7 +8,8 @@ hidden = [
   "bun.lockb",
   ".gitignore",
   "tsconfig.tsbuildinfo",
-  "dist"
+  "dist",
+  ".github"
 ]
 
 [nix]
