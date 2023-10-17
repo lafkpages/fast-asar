@@ -148,6 +148,12 @@ export class Asar extends DirectoryEntry {
     return bytes.subarray(offset, offset + size);
   }
 
+  /**
+   * Writes to a file inside the Asar archive
+   * @param path The path to the file inside the Asar archive
+   * @param data The data to write to the file
+   * @param createDirs Whether to create directories in between if they don't exist
+   */
   writeFile(
     path: string | string[],
     data: string | Uint8Array,
