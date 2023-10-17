@@ -82,6 +82,9 @@ export class FileEntry extends BaseEntry implements FileEntryData {
     this.data = data.data;
   }
 
+  /**
+   * The file's offset as specified in the ASAR header, but as a `number` instead of a `string`.
+   */
   get offsetAsNumber() {
     return parseInt(this.offset);
   }
