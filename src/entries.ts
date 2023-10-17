@@ -215,6 +215,11 @@ export class DirectoryEntry extends BaseEntry implements DirectoryEntryData {
     return Object.keys(this.files);
   }
 
+  /**
+   * Walks through the directory and recursively yields all files and directories.
+   * @param includeDirectories Whether to include directories in the result.
+   * @param _path Used internally for recursion.
+   */
   *walkFiles(
     includeDirectories = true,
     _path: string[] | null = null
