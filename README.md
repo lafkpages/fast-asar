@@ -47,6 +47,21 @@ This library can be run with [Node.js](https://nodejs.org) and [Bun](https://bun
 
 Browser support is planned.
 
+## Benchmarks
+
+The following benchmarks were run on a 2016 MacBook Pro with a 2.9 GHz Quad-Core Intel Core i7 processor and 16 GB of RAM.
+
+### List files
+
+This benchmark lists all files in the Replit Desktop app's `app.asar` file.
+
+| Library          | Time (ms)         |
+| ---------------- | ----------------- |
+| `@electron/asar` | 156.5ms ± 101.6ms |
+| `fast-asar`      | 98.7ms ± 4ms      |
+
+Summary: `fast-asar` is 1.59 ± 1.03 times faster than `@electron/asar`.
+
 ## Contributing
 
 ### Running tests
