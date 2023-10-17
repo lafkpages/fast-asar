@@ -51,6 +51,19 @@ Browser support is planned.
 
 The following benchmarks were run with [hyperfine](https://github.com/sharkdp/hyperfine) on a 2016 MacBook Pro with a 2.9 GHz Quad-Core Intel Core i7 processor and 16 GB of RAM.
 
+### Extract files
+
+This benchmark extracts all files in the Replit Desktop app's `app.asar` file.
+
+| Command                                                                  |     Mean [ms] | Min [ms] | Max [ms] |    Relative |
+| :----------------------------------------------------------------------- | ------------: | -------: | -------: | ----------: |
+| `./node_modules/.bin/asar extract test/ignore/app.asar test/ignore/app1` |  670.0 ± 52.6 |    614.6 |    739.4 | 1.54 ± 0.41 |
+| `bun ./src/cli/index.ts extract test/ignore/app.asar test/ignore/app2`   | 435.1 ± 110.9 |    373.7 |    632.3 |        1.00 |
+
+Summary: `fast-asar` is 1.54 ± 0.41 times faster than `@electron/asar`.
+
+To run this benchmark yourself, run `bun run benchmark:extract`.
+
 ### List files
 
 This benchmark lists all files in the Replit Desktop app's `app.asar` file.
