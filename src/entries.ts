@@ -206,6 +206,11 @@ export class DirectoryEntry extends BaseEntry implements DirectoryEntryData {
     throw new Error("[DirectoryEntry.getFromPath] Unreachable");
   }
 
+  /**
+   * Lists all files in this directory.
+   * This is **not** recursive.
+   * @returns A list of all files in this directory.
+   */
   listFiles() {
     return Object.keys(this.files);
   }
