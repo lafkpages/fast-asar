@@ -49,7 +49,7 @@ Browser support is planned.
 
 ## Benchmarks
 
-The following benchmarks were run on a 2016 MacBook Pro with a 2.9 GHz Quad-Core Intel Core i7 processor and 16 GB of RAM.
+The following benchmarks were run with [hyperfine](https://github.com/sharkdp/hyperfine) on a 2016 MacBook Pro with a 2.9 GHz Quad-Core Intel Core i7 processor and 16 GB of RAM.
 
 ### List files
 
