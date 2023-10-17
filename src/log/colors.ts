@@ -9,6 +9,10 @@ let colors: typeof import("ansi-colors");
 
 try {
   colors = await import("ansi-colors");
+
+  if (process.env.NO_COLOR) {
+    colors.enabled = false;
+  }
 } catch {
   // If ansi-colors is not installed, return a proxy that returns itself
   // when any property is accessed
