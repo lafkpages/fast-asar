@@ -73,7 +73,7 @@ This benchmark lists all files in the Replit Desktop app's `app.asar` file.
 | `./node_modules/.bin/asar list test/ignore/app.asar` | 136.0 ± 31.3 |    117.5 |    191.5 | 1.28 ± 0.30 |
 | `bun ./src/cli/index.ts list test/ignore/app.asar`   |  106.0 ± 5.9 |    101.3 |    116.2 |        1.00 |
 
-Summary: `fast-asar` is 1.59 ± 1.03 times faster than `@electron/asar`.
+Summary: `fast-asar` is 1.28 ± 0.30 times faster than `@electron/asar`.
 
 To run this benchmark yourself, run `bun run benchmark:list`.
 
