@@ -13,6 +13,105 @@
 <div class="tsd-page-title">
 <h2>fast-asar</h2></div>
 <div class="tsd-panel tsd-typography"><a id="md:fast-asar" class="tsd-anchor"></a><h1><a href="#md:fast-asar">fast-asar</a></h1><p>A faster implementation of Electron&#39;s ASAR archive format.</p>
+<p>This is both a library and a CLI tool.</p>
+<a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><p>You can install <code>fast-asar</code> from NPM (or your preferred package manager):</p>
+<pre><code class="language-sh"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">fast-asar</span>
+</code><button>Copy</button></pre>
+<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><a id="md:cli" class="tsd-anchor"></a><h3><a href="#md:cli">CLI</a></h3><p>You can use the CLI tool to extract and create ASAR archives.</p>
+<pre><code class="language-sh"><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">fast-asar</span><span class="hl-1"> </span><span class="hl-2">help</span>
+</code><button>Copy</button></pre>
+<a id="md:library" class="tsd-anchor"></a><h3><a href="#md:library">Library</a></h3><p>The library exports an <code>Asar</code> class, which can be used to read and write ASAR archives.</p>
+<p>For example, to extract an ASAR archive to a directory:</p>
+<pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">Asar</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;fast-asar&quot;</span><span class="hl-1">;</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">readFile</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;fs/promises&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">asarBytes</span><span class="hl-1"> = </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-0">readFile</span><span class="hl-1">(</span><span class="hl-2">&quot;./app.asar&quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">asar</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">Asar</span><span class="hl-1">(</span><span class="hl-4">asarBytes</span><span class="hl-1">);</span><br/><br/><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-4">asar</span><span class="hl-1">.</span><span class="hl-0">extract</span><span class="hl-1">(</span><span class="hl-2">&quot;./app-extracted&quot;</span><span class="hl-1">);</span>
+</code><button>Copy</button></pre>
+<p>For more information, see the <a href="https://lafkpages.github.io/fast-asar/">API documentation</a>.</p>
+<a id="md:compatibility" class="tsd-anchor"></a><h2><a href="#md:compatibility">Compatibility</a></h2><p>This library can be run with <a href="https://nodejs.org">Node.js</a> and <a href="https://bun.sh">Bun</a>.</p>
+<p>Browser support is planned.</p>
+<a id="md:benchmarks" class="tsd-anchor"></a><h2><a href="#md:benchmarks">Benchmarks</a></h2><p>The following benchmarks were run with <a href="https://github.com/sharkdp/hyperfine">hyperfine</a> on a 2016 MacBook Pro with a 2.9 GHz Quad-Core Intel Core i7 processor and 16 GB of RAM.</p>
+<a id="md:extract-files" class="tsd-anchor"></a><h3><a href="#md:extract-files">Extract files</a></h3><p>This benchmark extracts all files in the Replit Desktop app&#39;s <code>app.asar</code> file.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="right">Mean [ms]</th>
+<th align="right">Min [ms]</th>
+<th align="right">Max [ms]</th>
+<th align="right">Relative</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>./node_modules/.bin/asar extract test/ignore/app.asar test/ignore/app1</code></td>
+<td align="right">670.0 ± 52.6</td>
+<td align="right">614.6</td>
+<td align="right">739.4</td>
+<td align="right">1.54 ± 0.41</td>
+</tr>
+<tr>
+<td align="left"><code>bun ./src/cli/index.ts extract test/ignore/app.asar test/ignore/app2</code></td>
+<td align="right">435.1 ± 110.9</td>
+<td align="right">373.7</td>
+<td align="right">632.3</td>
+<td align="right">1.00</td>
+</tr>
+</tbody></table>
+<p>Summary: <code>fast-asar</code> is 1.54 ± 0.41 times faster than <code>@electron/asar</code>.</p>
+<p>To run this benchmark yourself, run <code>bun run benchmark:extract</code>.</p>
+<a id="md:pack-directories" class="tsd-anchor"></a><h3><a href="#md:pack-directories">Pack directories</a></h3><p>This benchmark packs the <code>src</code> directory into an ASAR archive at <code>test/ignore/src.asar</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="right">Mean [ms]</th>
+<th align="right">Min [ms]</th>
+<th align="right">Max [ms]</th>
+<th align="right">Relative</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>./node_modules/.bin/asar pack src test/ignore/src.asar</code></td>
+<td align="right">154.7 ± 45.3</td>
+<td align="right">123.4</td>
+<td align="right">231.7</td>
+<td align="right">1.93 ± 0.57</td>
+</tr>
+<tr>
+<td align="left"><code>bun ./src/cli/index.ts pack src test/ignore/src.asar</code></td>
+<td align="right">80.0 ± 3.1</td>
+<td align="right">77.6</td>
+<td align="right">85.4</td>
+<td align="right">1.00</td>
+</tr>
+</tbody></table>
+<p>Summary: <code>fast-asar</code> is 1.93 ± 0.57 times faster than <code>@electron/asar</code>.</p>
+<p>To run this benchmark yourself, run <code>bun run benchmark:pack</code>.</p>
+<a id="md:list-files" class="tsd-anchor"></a><h3><a href="#md:list-files">List files</a></h3><p>This benchmark lists all files in the Replit Desktop app&#39;s <code>app.asar</code> file.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="right">Mean [ms]</th>
+<th align="right">Min [ms]</th>
+<th align="right">Max [ms]</th>
+<th align="right">Relative</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>./node_modules/.bin/asar list test/ignore/app.asar</code></td>
+<td align="right">136.0 ± 31.3</td>
+<td align="right">117.5</td>
+<td align="right">191.5</td>
+<td align="right">1.28 ± 0.30</td>
+</tr>
+<tr>
+<td align="left"><code>bun ./src/cli/index.ts list test/ignore/app.asar</code></td>
+<td align="right">106.0 ± 5.9</td>
+<td align="right">101.3</td>
+<td align="right">116.2</td>
+<td align="right">1.00</td>
+</tr>
+</tbody></table>
+<p>Summary: <code>fast-asar</code> is 1.28 ± 0.30 times faster than <code>@electron/asar</code>.</p>
+<p>To run this benchmark yourself, run <code>bun run benchmark:list</code>.</p>
 <a id="md:contributing" class="tsd-anchor"></a><h2><a href="#md:contributing">Contributing</a></h2><a id="md:running-tests" class="tsd-anchor"></a><h3><a href="#md:running-tests">Running tests</a></h3><p>For the tests, you must have the Replit Desktop app&#39;s <code>app.asar</code> file in the <code>test/ignore</code> directory.
 You can get this file by installing the Replit Desktop app and copying the <code>app.asar</code> file from the installation directory.</p>
 <p>Then, to run all tests:</p>
@@ -43,6 +142,19 @@ You can get this file by installing the Replit Desktop app and copying the <code
 <li><a href="#md:fast-asar"><span>fast-<wbr/>asar</span></a></li>
 <li>
 <ul>
+<li><a href="#md:installation"><span>Installation</span></a></li>
+<li><a href="#md:usage"><span>Usage</span></a></li>
+<li>
+<ul>
+<li><a href="#md:cli"><span>CLI</span></a></li>
+<li><a href="#md:library"><span>Library</span></a></li></ul></li>
+<li><a href="#md:compatibility"><span>Compatibility</span></a></li>
+<li><a href="#md:benchmarks"><span>Benchmarks</span></a></li>
+<li>
+<ul>
+<li><a href="#md:extract-files"><span>Extract files</span></a></li>
+<li><a href="#md:pack-directories"><span>Pack directories</span></a></li>
+<li><a href="#md:list-files"><span>List files</span></a></li></ul></li>
 <li><a href="#md:contributing"><span>Contributing</span></a></li>
 <li>
 <ul>
