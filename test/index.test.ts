@@ -66,9 +66,11 @@ test("Asar.initialParseData.header    ", () => {
 });
 
 test("Asar.extract", async () => {
-  await asar.extract("test/ignore/app.asar.extracted");
+  const extractOutputPath = "test/ignore/app.asar.extracted";
 
-  const extractedFiles = await readdir("test/ignore/app.asar.extracted");
+  await asar.extract(extractOutputPath);
+
+  const extractedFiles = await readdir(extractOutputPath);
   const asarFiles = asar.listFiles();
 
   expect(extractedFiles).toBeArray();
