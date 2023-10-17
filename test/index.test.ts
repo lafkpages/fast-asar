@@ -4,7 +4,7 @@ import { test, expect } from "bun:test";
 
 import { Asar, BaseEntry } from "../src";
 
-import { readFile, writeFile } from "fs/promises";
+import { readFile, readdir, writeFile } from "fs/promises";
 import { normalize as normalizePath } from "path";
 
 import type { FileEntryData } from "../src/types/entries";
@@ -63,6 +63,28 @@ test("Asar.initialParseData.header    ", () => {
   // Now we can "!" assert it
 
   expect(BaseEntry.isDirectory(asar.initialParseData!.header)).toBeTrue();
+});
+
+test("Asar.extract", async () => {
+  asar.extract("test/ignore/app.asar.extracted");
+
+  const extractedFiles = await readdir("test/ignore/app.asar.extracted");
+  const asarFiles = asar.listFiles();
+
+  expect(extractedFiles).toBeArray();
+  expect(extractedFiles).not.toBeEmpty();
+  expect(extractedFiles).toContain("package.json");
+
+  expect(asarFiles).toBeArray();
+  expect(asarFiles).not.toBeEmpty();
+  expect(asarFiles).toContain("package.json");
+
+  // Expect the same files to be extracted as are in the ASAR
+  expect(extractedFiles.length).toBe(asarFiles.length);
+
+  for (const file of extractedFiles) {
+    expect(asarFiles).toContain(file);
+  }
 });
 
 let packageJsonEntry: BaseEntry;
