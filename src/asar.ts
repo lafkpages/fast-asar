@@ -22,6 +22,10 @@ export interface AsarInitialParseData {
   rawHeader: string;
 }
 
+/**
+ * Options for getting the Asar archive data.
+ * All options are treated as `false` by default.
+ */
 export interface AsarGetDataOptions {
   noSort: boolean;
   noRecalculateIntegrity: boolean;
