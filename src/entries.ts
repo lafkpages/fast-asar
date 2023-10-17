@@ -33,6 +33,10 @@ export class BaseEntry {
     return entry instanceof BaseEntry;
   }
 
+  /**
+   * Checks whether the given entry is a directory.
+   * @param entry The entry or entry data to check.
+   */
   static isDirectory(entry: BaseEntry): entry is DirectoryEntry;
   static isDirectory(entry: EntryData): entry is DirectoryEntryData;
   static isDirectory(entry: BaseEntry | EntryData): boolean {
