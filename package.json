@@ -23,7 +23,7 @@
     "pretest": "bun scripts/cleanupTestData.ts",
     "test": "bun test",
     "prepublishOnly": "bun run build",
-    "benchmark:list": "hyperfine -r 5 './node_modules/.bin/asar list test/ignore/app.asar' 'bun ./src/cli/index.ts list test/ignore/app.asar'"
+    "benchmark:list": "hyperfine -r 5 './node_modules/.bin/asar list test/ignore/app.asar' 'bun ./src/cli/index.ts list test/ignore/app.asar' --export-markdown benchmark/list.md"
   },
   "bin": "dist/cli/index.js",
   "optionalDependencies": {
