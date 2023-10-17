@@ -7,8 +7,3 @@ hidden = [".config", "bun.lockb", ".gitignore"]
 
 [nix]
 channel = "stable-22_11"
-
-[deployment]
-build = ["sh", "-c", "mkdir .build && bun build src/index.ts > .build/index.js"]
-run = ["bun", ".build/index.js"]
-deploymentTarget = "cloudrun"
