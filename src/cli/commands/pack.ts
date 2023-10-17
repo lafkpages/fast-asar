@@ -8,13 +8,7 @@ import { join as joinPaths } from "path";
 export default async function pack(...args: string[]) {
   const [input, archive] = args;
 
-  const asar = new Asar();
-
-  for await (const [filePath] of walk(input)) {
-    const fileData = await readFile(joinPaths(input, "..", filePath));
-
-    asar.writeFile(filePath, fileData, true);
-  }
+  const asar = await Asar.fromDirectory(input);
 
   // Save Asar
   const asarData = asar.getData();
