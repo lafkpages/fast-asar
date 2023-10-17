@@ -160,6 +160,10 @@ export class DirectoryEntry extends BaseEntry implements DirectoryEntryData {
     this.files = data.files;
   }
 
+  /**
+   * Gets the entry at the given path.
+   * @param path The path or path chunks to get the entry at.
+   */
   getFromPath(path: string | string[]) {
     let chunks: (string | null)[];
     if (Array.isArray(path)) {
