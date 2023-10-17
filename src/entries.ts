@@ -97,6 +97,12 @@ export class FileEntry extends BaseEntry implements FileEntryData {
     return this.offsetAsNumber + 17 + headerSize;
   }
 
+  /**
+   * Calculates the integrity of the given file data.
+   * @param data The file data to calculate the integrity of.
+   * @returns The integrity of the given file data, in the
+   * same format as the `integrity` property of `FileEntryData`.
+   */
   static calculateIntegrity(
     data: FileEntryData["data"]
   ): FileEntryData["integrity"] {
@@ -133,6 +139,11 @@ export class FileEntry extends BaseEntry implements FileEntryData {
     };
   }
 
+  /**
+   * Calculates the integrity of this file's data.
+   * @returns The integrity of the given file data, in the
+   * same format as the `integrity` property of `FileEntryData`.
+   */
   calculateIntegrity() {
     return FileEntry.calculateIntegrity(this.data);
   }
