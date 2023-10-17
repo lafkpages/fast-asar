@@ -102,6 +102,11 @@ export class Asar extends DirectoryEntry {
     }
   }
 
+  /**
+   * Creates a new Asar instance from a directory
+   * @param inputDir The directory to read from
+   * @returns The Asar instance
+   */
   static async fromDirectory(inputDir: string) {
     const asar = new Asar();
 
