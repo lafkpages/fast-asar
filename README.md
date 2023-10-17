@@ -6,7 +6,7 @@ This is both a library and a CLI tool.
 
 ## Installation
 
-You can install `fast-asar` from NPM:
+You can install `fast-asar` from NPM (or your preferred package manager):
 
 ```sh
 npm install fast-asar
