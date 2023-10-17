@@ -205,6 +205,10 @@ export class Asar extends DirectoryEntry {
     }
   }
 
+  /**
+   * Extracts the Asar archive to a directory
+   * @param output The directory to extract to
+   */
   async extract(output: string) {
     for (const [, filePathChunks, fileEntry] of this.walkFiles(true)) {
       if (BaseEntry.isDirectory(fileEntry)) {
