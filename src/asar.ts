@@ -227,6 +227,11 @@ export class Asar extends DirectoryEntry {
     }
   }
 
+  /**
+   * Gets the Asar archive data
+   * @param opts Options for getting the data and what to return
+   * @returns The Asar archive data, and more if specified in the options
+   */
   getData(opts: Partial<AsarGetDataOptions> = {}) {
     const headerData: DirectoryEntryData = {
       files: {},
