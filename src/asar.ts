@@ -9,6 +9,9 @@ import { BaseEntry, FileEntry, DirectoryEntry } from "./entries";
 
 import type { Entry, FileEntryData, DirectoryEntryData } from "./types/entries";
 
+/**
+ * Options for initializing an Asar instance
+ */
 export interface AsarOptions {
   storeInitialParseData: boolean;
 }
