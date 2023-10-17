@@ -8,7 +8,5 @@ export default async function pack(...args: string[]) {
   const asar = await Asar.fromDirectory(input);
 
   // Save Asar
-  const asarData = asar.getData();
-
-  await writeFile(archive, asarData.bytes);
+  await asar.saveData(archive);
 }

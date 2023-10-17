@@ -331,4 +331,10 @@ export class Asar extends DirectoryEntry {
     }
     return returnValue;
   }
+
+  async saveData(asarPath: string) {
+    const asarData = this.getData();
+
+    await writeFile(asarPath, asarData.bytes);
+  }
 }
