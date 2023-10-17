@@ -89,6 +89,10 @@ export class FileEntry extends BaseEntry implements FileEntryData {
     return parseInt(this.offset);
   }
 
+  /**
+   * Gets the offset of the file's data in the ASAR archive.
+   * @param headerSize The size of the ASAR header.
+   */
   getOffsetFromAsarData(headerSize: number) {
     return this.offsetAsNumber + 17 + headerSize;
   }
