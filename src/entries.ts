@@ -29,6 +29,10 @@ export class BaseEntry {
     }
   }
 
+  /**
+   * Checks wether the given value is an entry.
+   * @param entry The value to check.
+   */
   static isEntry(entry: unknown): entry is Entry {
     return entry instanceof BaseEntry;
   }
