@@ -62,6 +62,8 @@ This benchmark lists all files in the Replit Desktop app's `app.asar` file.
 
 Summary: `fast-asar` is 1.59 ± 1.03 times faster than `@electron/asar`.
 
+To run this benchmark yourself, run `bun run benchmark:list`.
+
 ## Contributing
 
 ### Running tests
