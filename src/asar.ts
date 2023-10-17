@@ -119,6 +119,11 @@ export class Asar extends DirectoryEntry {
     return asar;
   }
 
+  /**
+   * Reads a file from the Asar archive
+   * @param path The path to the file inside the Asar archive
+   * @returns The file data
+   */
   readFile(
     path: Entry | Parameters<DirectoryEntry["getFromPath"]>[0]
   ): Uint8Array {
