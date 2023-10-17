@@ -43,6 +43,10 @@ export class BaseEntry {
     return "files" in entry;
   }
 
+  /**
+   * Checks whether the given entry is a file.
+   * @param entry The entry or entry data to check.
+   */
   static isFile(entry: BaseEntry): entry is FileEntry;
   static isFile(entry: EntryData): entry is FileEntryData;
   static isFile(entry: BaseEntry | EntryData): boolean {
