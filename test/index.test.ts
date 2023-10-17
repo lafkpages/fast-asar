@@ -1,3 +1,5 @@
+/// <reference types="bun-types" />
+
 import { test, expect } from "bun:test";
 
 import { Asar, BaseEntry } from "../src";
