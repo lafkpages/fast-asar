@@ -1,6 +1,6 @@
 import { normalize as normalizePath } from "path";
 
-import { sha256 } from "./hash";
+import { sha256 } from "./utils/hash";
 
 import type {
   Entry,
