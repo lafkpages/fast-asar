@@ -1,9 +1,6 @@
 import { Asar } from "../..";
 
-import { walk } from "../../utils/fs";
-
-import { readFile, writeFile } from "fs/promises";
-import { join as joinPaths } from "path";
+import { writeFile } from "fs/promises";
 
 export default async function pack(...args: string[]) {
   const [input, archive] = args;
