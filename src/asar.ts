@@ -1,5 +1,7 @@
-import { normalize as normalizePath } from "path";
+import { normalize as normalizePath, join as joinPaths } from "path";
 import { createFromBuffer, createEmpty } from "@tybys/chromium-pickle-js";
+
+import { writeFile, mkdir } from "fs/promises";
 
 import { BaseEntry, FileEntry, DirectoryEntry } from "./entries";
 
@@ -170,6 +172,24 @@ export class Asar extends DirectoryEntry {
       }
 
       currentDir = (currentDir[pathChunk] as DirectoryEntryData).files;
+    }
+  }
+
+  async extract(output: string) {
+    for (const [, filePathChunks, fileEntry] of this.walkFiles(true)) {
+      if (BaseEntry.isDirectory(fileEntry)) {
+        const fileDirPath = joinPaths(output, ...filePathChunks);
+
+        await mkdir(fileDirPath, {
+          recursive: true,
+        });
+      } else {
+        const filePath = joinPaths(output, ...filePathChunks);
+
+        const fileData = this.readFile(fileEntry);
+
+        await writeFile(filePath, fileData);
+      }
     }
   }
 
