@@ -14,15 +14,9 @@ export class BaseEntry {
    * Creates an entry from the given entry data.
    * @param entryData The entry data to create the entry from.
    */
-  static fromData(entryData: FileEntryData, fileData?: Uint8Array): FileEntry;
-  static fromData(
-    entryData: DirectoryEntryData,
-    fileData?: Uint8Array
-  ): DirectoryEntry;
-  static fromData(
-    entryData: FileEntryData | DirectoryEntryData,
-    fileData?: Uint8Array
-  ): Entry;
+  static fromData(entryData: FileEntryData): FileEntry;
+  static fromData(entryData: DirectoryEntryData): DirectoryEntry;
+  static fromData(entryData: EntryData): Entry;
   static fromData(entryData: EntryData): Entry {
     if (this.isDirectory(entryData)) {
       return new DirectoryEntry(entryData);
