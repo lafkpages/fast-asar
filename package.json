@@ -24,6 +24,7 @@
     "test": "bun test",
     "prepublishOnly": "bun run build",
     "benchmark:extract": "hyperfine -r 5 './node_modules/.bin/asar extract test/ignore/app.asar test/ignore/app1' 'bun ./src/cli/index.ts extract test/ignore/app.asar test/ignore/app2' -c 'rm -rf test/ignore/app1 test/ignore/app2' --export-markdown benchmark/extract.md",
+    "benchmark:pack": "hyperfine -r 5 './node_modules/.bin/asar pack src test/ignore/src.asar' 'bun ./src/cli/index.ts pack src test/ignore/src.asar' -c 'rm -f test/ignore/src.asar' --export-markdown benchmark/pack.md",
     "benchmark:list": "hyperfine -r 5 './node_modules/.bin/asar list test/ignore/app.asar' 'bun ./src/cli/index.ts list test/ignore/app.asar' --export-markdown benchmark/list.md"
   },
   "bin": "dist/cli/index.js",
