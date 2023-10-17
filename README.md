@@ -64,6 +64,19 @@ Summary: `fast-asar` is 1.54 ± 0.41 times faster than `@electron/asar`.
 
 To run this benchmark yourself, run `bun run benchmark:extract`.
 
+### Pack directories
+
+This benchmark packs the `src` directory into an ASAR archive at `test/ignore/src.asar`.
+
+| Command                                                  |    Mean [ms] | Min [ms] | Max [ms] |    Relative |
+| :------------------------------------------------------- | -----------: | -------: | -------: | ----------: |
+| `./node_modules/.bin/asar pack src test/ignore/src.asar` | 154.7 ± 45.3 |    123.4 |    231.7 | 1.93 ± 0.57 |
+| `bun ./src/cli/index.ts pack src test/ignore/src.asar`   |   80.0 ± 3.1 |     77.6 |     85.4 |        1.00 |
+
+Summary: `fast-asar` is 1.93 ± 0.57 times faster than `@electron/asar`.
+
+To run this benchmark yourself, run `bun run benchmark:pack`.
+
 ### List files
 
 This benchmark lists all files in the Replit Desktop app's `app.asar` file.
