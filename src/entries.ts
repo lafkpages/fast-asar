@@ -149,6 +149,9 @@ export class FileEntry extends BaseEntry implements FileEntryData {
   }
 }
 
+/**
+ * A directory entry.
+ */
 export class DirectoryEntry extends BaseEntry implements DirectoryEntryData {
   files;
 
