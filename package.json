@@ -22,7 +22,8 @@
     "build:docs": "typedoc src/index.ts",
     "pretest": "bun scripts/cleanupTestData.ts",
     "test": "bun test",
-    "prepublishOnly": "bun run build"
+    "prepublishOnly": "bun run build",
+    "benchmark:list": "hyperfine -r 5 './node_modules/.bin/asar list test/ignore/app.asar' 'bun ./src/cli/index.ts list test/ignore/app.asar'"
   },
   "bin": "dist/cli/index.js",
   "optionalDependencies": {
