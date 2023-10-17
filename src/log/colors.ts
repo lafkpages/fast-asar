@@ -1,4 +1,12 @@
+/**
+ * The `ansi-colors` module, or a proxy that returns itself when any property
+ * is accessed if `ansi-colors` is not installed.
+ *
+ * This is used so that the `ansi-colors` module can be imported and used as normal
+ * without causing an error if `ansi-colors` is not installed.
+ */
 let colors: typeof import("ansi-colors");
+
 try {
   colors = await import("ansi-colors");
 } catch {
