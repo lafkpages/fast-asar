@@ -22,7 +22,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">Asar</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/asar.ts#L27">asar.ts:27</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L34">asar.ts:34</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -39,13 +39,16 @@
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Methods</h3>
-<div class="tsd-index-list"><a href="Asar.html#getData" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Data</span></a>
+<div class="tsd-index-list"><a href="Asar.html#extract" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>extract</span></a>
+<a href="Asar.html#getData" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Data</span></a>
 <a href="Asar.html#getFromPath" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>From<wbr/>Path</span></a>
 <a href="Asar.html#listFiles" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>list<wbr/>Files</span></a>
 <a href="Asar.html#readFile" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>read<wbr/>File</span></a>
+<a href="Asar.html#saveData" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>save<wbr/>Data</span></a>
 <a href="Asar.html#walkFiles" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>walk<wbr/>Files</span></a>
 <a href="Asar.html#writeFile" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>write<wbr/>File</span></a>
 <a href="Asar.html#fromData" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>from<wbr/>Data</span></a>
+<a href="Asar.html#fromDirectory" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>from<wbr/>Directory</span></a>
 <a href="Asar.html#isDirectory" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>is<wbr/>Directory</span></a>
 <a href="Asar.html#isEntry" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>is<wbr/>Entry</span></a>
 <a href="Asar.html#isFile" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>is<wbr/>File</span></a>
@@ -68,7 +71,7 @@
 <h4 class="tsd-returns-title">Returns <a href="Asar.html" class="tsd-signature-type tsd-kind-class">Asar</a></h4><aside class="tsd-sources">
 <p>Overrides <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#constructor">constructor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/asar.ts#L30">asar.ts:30</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L37">asar.ts:37</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="files" class="tsd-anchor"></a>
@@ -81,25 +84,50 @@
 <h5><span class="tsd-signature-symbol">[</span><span class="tsd-kind-parameter">filename</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type ">EntryData</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5></li></ul></div><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#files">files</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L115">entries.ts:115</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L115">entries.ts:115</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="initialParseData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>initial<wbr/>Parse<wbr/>Data</span><a href="#initialParseData" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">initial<wbr/>Parse<wbr/>Data</span><span class="tsd-signature-symbol">?:</span> <a href="../interfaces/AsarInitialParseData.html" class="tsd-signature-type tsd-kind-interface">AsarInitialParseData</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/asar.ts#L28">asar.ts:28</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L35">asar.ts:35</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
+<section class="tsd-panel tsd-member"><a id="extract" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>extract</span><a href="#extract" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="extract.extract-1"><span class="tsd-kind-call-signature">extract</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">output</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#extract.extract-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Extracts the Asar archive to a directory</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">output</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The directory to extract to</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L215">asar.ts:215</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="getData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Data</span><a href="#getData" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getData.getData-1"><span class="tsd-kind-call-signature">get<wbr/>Data</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">opts</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">bytes</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Uint8Array</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">header</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">DirectoryEntryData</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">headerString</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">rawHeader</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">Uint8Array</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">rawHeaderSize</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><a href="#getData.getData-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Gets the Asar archive data</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">opts</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/AsarGetDataOptions.html" class="tsd-signature-type tsd-kind-interface">AsarGetDataOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">bytes</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Uint8Array</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">header</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">DirectoryEntryData</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">headerString</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">rawHeader</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">Uint8Array</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">rawHeaderSize</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h4>
+<h5><span class="tsd-kind-parameter">opts</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/AsarGetDataOptions.html" class="tsd-signature-type tsd-kind-interface">AsarGetDataOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></h5>
+<div class="tsd-comment tsd-typography"><p>Options for getting the data and what to return</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">bytes</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Uint8Array</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">header</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">DirectoryEntryData</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">headerString</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">rawHeader</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">Uint8Array</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">rawHeaderSize</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h4><p>The Asar archive data, and more if specified in the options</p>
+
 <ul class="tsd-parameters">
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">bytes</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Uint8Array</span></h5></li>
@@ -110,9 +138,10 @@
 <li class="tsd-parameter">
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">raw<wbr/>Header</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">Uint8Array</span></h5></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">raw<wbr/>Header<wbr/>Size</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li></ul><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">raw<wbr/>Header<wbr/>Size</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li></ul>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/asar.ts#L176">asar.ts:176</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L238">asar.ts:238</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="getFromPath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>From<wbr/>Path</span><a href="#getFromPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -126,7 +155,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Entry</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#getFromPath">getFromPath</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L122">entries.ts:122</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L122">entries.ts:122</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="listFiles" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>list<wbr/>Files</span><a href="#listFiles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -135,20 +164,46 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#listFiles">listFiles</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L164">entries.ts:164</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L164">entries.ts:164</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="readFile" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>read<wbr/>File</span><a href="#readFile" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="readFile.readFile-1"><span class="tsd-kind-call-signature">read<wbr/>File</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">path</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Uint8Array</span><a href="#readFile.readFile-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Reads a file from the Asar archive</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">path</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">Entry</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Uint8Array</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">path</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">Entry</span></h5>
+<div class="tsd-comment tsd-typography"><p>The path to the file inside the Asar archive</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Uint8Array</span></h4><p>The file data</p>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/asar.ts#L101">asar.ts:101</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L130">asar.ts:130</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="saveData" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>save<wbr/>Data</span><a href="#saveData" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="saveData.saveData-1"><span class="tsd-kind-call-signature">save<wbr/>Data</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">asarPath</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#saveData.saveData-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Gets the Asar archive data and saves it to a file</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">asarPath</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The path to save the Asar archive to</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L367">asar.ts:367</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="walkFiles" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>walk<wbr/>Files</span><a href="#walkFiles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -164,24 +219,36 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Generator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Entry</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#walkFiles">walkFiles</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L168">entries.ts:168</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L168">entries.ts:168</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="writeFile" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>write<wbr/>File</span><a href="#writeFile" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="writeFile.writeFile-1"><span class="tsd-kind-call-signature">write<wbr/>File</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">path</span>, <span class="tsd-kind-parameter">data</span>, <span class="tsd-kind-parameter">createDirs</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#writeFile.writeFile-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Writes to a file inside the Asar archive</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">path</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><span class="tsd-kind-parameter">path</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>The path to the file inside the Asar archive</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">data</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">Uint8Array</span></h5></li>
+<h5><span class="tsd-kind-parameter">data</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">Uint8Array</span></h5>
+<div class="tsd-comment tsd-typography"><p>The data to write to the file</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">createDirs</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">createDirs</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+<div class="tsd-comment tsd-typography"><p>Whether to create directories in between if they don&#39;t exist</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/asar.ts#L125">asar.ts:125</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L160">asar.ts:160</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="fromData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>from<wbr/>Data</span><a href="#fromData" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -197,7 +264,7 @@
 <h4 class="tsd-returns-title">Returns <a href="FileEntry.html" class="tsd-signature-type tsd-kind-class">FileEntry</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#fromData">fromData</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L13">entries.ts:13</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L13">entries.ts:13</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="fromData.fromData-2"><span class="tsd-kind-call-signature">from<wbr/>Data</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">entryData</span>, <span class="tsd-kind-parameter">fileData</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="DirectoryEntry.html" class="tsd-signature-type tsd-kind-class">DirectoryEntry</a><a href="#fromData.fromData-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -210,7 +277,7 @@
 <h4 class="tsd-returns-title">Returns <a href="DirectoryEntry.html" class="tsd-signature-type tsd-kind-class">DirectoryEntry</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#fromData">fromData</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L14">entries.ts:14</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L14">entries.ts:14</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="fromData.fromData-3"><span class="tsd-kind-call-signature">from<wbr/>Data</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">entryData</span>, <span class="tsd-kind-parameter">fileData</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Entry</span><a href="#fromData.fromData-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -223,7 +290,27 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Entry</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#fromData">fromData</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L18">entries.ts:18</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L18">entries.ts:18</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="fromDirectory" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>from<wbr/>Directory</span><a href="#fromDirectory" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="fromDirectory.fromDirectory-1"><span class="tsd-kind-call-signature">from<wbr/>Directory</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">inputDir</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Asar.html" class="tsd-signature-type tsd-kind-class">Asar</a><span class="tsd-signature-symbol">&gt;</span><a href="#fromDirectory.fromDirectory-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a new Asar instance from a directory</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">inputDir</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The directory to read from</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="Asar.html" class="tsd-signature-type tsd-kind-class">Asar</a><span class="tsd-signature-symbol">&gt;</span></h4><p>The Asar instance</p>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L113">asar.ts:113</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="isDirectory" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>is<wbr/>Directory</span><a href="#isDirectory" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -237,7 +324,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol"> is </span><a href="DirectoryEntry.html" class="tsd-signature-type tsd-kind-class">DirectoryEntry</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#isDirectory">isDirectory</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L36">entries.ts:36</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L36">entries.ts:36</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="isDirectory.isDirectory-2"><span class="tsd-kind-call-signature">is<wbr/>Directory</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type ">DirectoryEntryData</span><a href="#isDirectory.isDirectory-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -248,7 +335,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type ">DirectoryEntryData</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#isDirectory">isDirectory</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L37">entries.ts:37</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L37">entries.ts:37</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="isEntry" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>is<wbr/>Entry</span><a href="#isEntry" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -262,7 +349,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type ">Entry</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#isEntry">isEntry</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L32">entries.ts:32</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L32">entries.ts:32</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="isFile" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>is<wbr/>File</span><a href="#isFile" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -276,7 +363,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol"> is </span><a href="FileEntry.html" class="tsd-signature-type tsd-kind-class">FileEntry</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#isFile">isFile</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L42">entries.ts:42</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L42">entries.ts:42</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="isFile.isFile-2"><span class="tsd-kind-call-signature">is<wbr/>File</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type ">FileEntryData</span><a href="#isFile.isFile-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -287,7 +374,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">entry</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type ">FileEntryData</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="DirectoryEntry.html">DirectoryEntry</a>.<a href="DirectoryEntry.html#isFile">isFile</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/entries.ts#L43">entries.ts:43</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/entries.ts#L43">entries.ts:43</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="readFileFromBytes" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagPrivate">Private</code> <span>read<wbr/>File<wbr/>From<wbr/>Bytes</span><a href="#readFileFromBytes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-private">
@@ -304,7 +391,7 @@
 <h5><span class="tsd-kind-parameter">size</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Uint8Array</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/fdf89a7/src/asar.ts#L117">asar.ts:117</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/d414d52/src/asar.ts#L146">asar.ts:146</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -327,13 +414,16 @@
 <li><a href="#constructor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a></li>
 <li><a href="#files" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>files</span></a></li>
 <li><a href="#initialParseData" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>initial<wbr/>Parse<wbr/>Data</span></a></li>
+<li><a href="#extract" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>extract</span></a></li>
 <li><a href="#getData" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Data</span></a></li>
 <li><a href="#getFromPath" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>From<wbr/>Path</span></a></li>
 <li><a href="#listFiles" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>list<wbr/>Files</span></a></li>
 <li><a href="#readFile" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>read<wbr/>File</span></a></li>
+<li><a href="#saveData" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>save<wbr/>Data</span></a></li>
 <li><a href="#walkFiles" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>walk<wbr/>Files</span></a></li>
 <li><a href="#writeFile" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>write<wbr/>File</span></a></li>
 <li><a href="#fromData" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>from<wbr/>Data</span></a></li>
+<li><a href="#fromDirectory" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>from<wbr/>Directory</span></a></li>
 <li><a href="#isDirectory" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>is<wbr/>Directory</span></a></li>
 <li><a href="#isEntry" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>is<wbr/>Entry</span></a></li>
 <li><a href="#isFile" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>is<wbr/>File</span></a></li>
