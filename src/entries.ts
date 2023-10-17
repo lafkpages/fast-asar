@@ -9,6 +9,13 @@ import type {
   DirectoryEntryData,
 } from "./types/entries";
 
+/**
+ * A base class for entries. This class is not meant to be used directly, but
+ * rather to be extended by other classes.
+ *
+ * This class provides static methods for checking whether an entry is a file
+ * or a directory, and for creating an entry from entry data.
+ */
 export class BaseEntry {
   /**
    * Creates an entry from the given entry data.
