@@ -63,6 +63,9 @@ export class BaseEntry {
   }
 }
 
+/**
+ * A file entry.
+ */
 export class FileEntry extends BaseEntry implements FileEntryData {
   size;
   offset;
