@@ -24,7 +24,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">AsarOptions</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/2176d27/src/asar.ts#L15">asar.ts:15</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/193ca24/src/asar.ts#L15">asar.ts:15</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -32,15 +32,34 @@
 <div class="tsd-accordion-details">
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="AsarOptions.html#storeInitialParseData" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>store<wbr/>Initial<wbr/>Parse<wbr/>Data</span></a>
+<div class="tsd-index-list"><a href="AsarOptions.html#noFileData" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>no<wbr/>File<wbr/>Data</span></a>
+<a href="AsarOptions.html#storeInitialParseData" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>store<wbr/>Initial<wbr/>Parse<wbr/>Data</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
+<section class="tsd-panel tsd-member"><a id="noFileData" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>no<wbr/>File<wbr/>Data</span><a href="#noFileData" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">no<wbr/>File<wbr/>Data</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>If enabled, file data will not be read from the Asar archive
+when initializing the Asar instance. This is useful if you
+only need the directory structure, for example to list files.
+Skipping file data will make the initialization faster.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/193ca24/src/asar.ts#L31">asar.ts:31</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="storeInitialParseData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>store<wbr/>Initial<wbr/>Parse<wbr/>Data</span><a href="#storeInitialParseData" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">store<wbr/>Initial<wbr/>Parse<wbr/>Data</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">store<wbr/>Initial<wbr/>Parse<wbr/>Data</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>Whether to store data from the initial parsing
+of the Asar archive, such as the header size,
+the header object, and the raw header.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<h4>See</h4><p>AsarInitialParseData</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/2176d27/src/asar.ts#L16">asar.ts:16</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/lafkpages/fast-asar/blob/193ca24/src/asar.ts#L23">asar.ts:23</a></li></ul></aside></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -60,6 +79,7 @@
 <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
 <div class="tsd-accordion-details">
 <ul>
+<li><a href="#noFileData" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>no<wbr/>File<wbr/>Data</span></a></li>
 <li><a href="#storeInitialParseData" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>store<wbr/>Initial<wbr/>Parse<wbr/>Data</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>fast-asar</span></a>
