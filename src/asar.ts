@@ -405,6 +405,7 @@ export class Asar extends DirectoryEntry {
   /**
    * Gets the Asar archive data and saves it to a file
    * @param asarPath The path to save the Asar archive to
+   * @param opts Options passed to `Asar.getData`
    */
   async saveData(asarPath: string, opts: Partial<AsarGetDataOptions> = {}) {
     const asarData = this.getData(opts);
