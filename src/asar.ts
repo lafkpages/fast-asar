@@ -31,6 +31,13 @@ export interface AsarOptions {
   noFileData: boolean;
 }
 
+/**
+ * Data from the initial parsing of the Asar archive.
+ * This is only available if the `storeInitialParseData` option
+ * is enabled when initializing the Asar instance.
+ *
+ * @see AsarOptions.noFileData
+ */
 export interface AsarInitialParseData {
   headerSize: number;
   header: DirectoryEntryData;
