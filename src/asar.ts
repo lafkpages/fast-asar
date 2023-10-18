@@ -57,7 +57,14 @@ export interface AsarGetDataOptions {
    */
   noSort: boolean;
 
+  /**
+   * When getting the Asar archive data, the file integrity
+   * is recalculated by default, even if it is already present
+   * in a `FileEntry`. If this option is enabled, the file
+   * integrity will not be recalculated if it is already present.
+   */
   noRecalculateIntegrity: boolean;
+
   returnRawHeader: boolean;
   returnRawHeaderSize: boolean;
   returnHeaderString: boolean;
