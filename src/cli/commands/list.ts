@@ -9,7 +9,9 @@ export default async function list(...args: string[]) {
 
   const asarBytes = await readFile(archive);
 
-  const asar = new Asar(asarBytes);
+  const asar = new Asar(asarBytes, {
+    noFileData: true,
+  });
 
   for (const [, filePathChunks] of asar.walkFiles(true)) {
     console.log(joinPaths(...filePathChunks));
