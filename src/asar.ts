@@ -13,7 +13,15 @@ import type { Entry, FileEntryData, DirectoryEntryData } from "./types/entries";
  * Options for initializing an Asar instance
  */
 export interface AsarOptions {
+  /**
+   * Whether to store data from the initial parsing
+   * of the Asar archive, such as the header size,
+   * the header object, and the raw header.
+   *
+   * @see AsarInitialParseData
+   */
   storeInitialParseData: boolean;
+
   noFileData: boolean;
 }
 
