@@ -14,6 +14,7 @@ import type { Entry, FileEntryData, DirectoryEntryData } from "./types/entries";
  */
 export interface AsarOptions {
   storeInitialParseData: boolean;
+  noFileData: boolean;
 }
 
 export interface AsarInitialParseData {
@@ -71,37 +72,39 @@ export class Asar extends DirectoryEntry {
         };
       }
 
-      // Read all files
-      for (const [, filePath, fileEntry] of this.walkFiles(false)) {
-        // We can assume that fileEntry is a FileEntry,
-        // because we specified walkFiles(false)
-        const offset = (fileEntry as FileEntry).getOffsetFromAsarData(
-          headerSize
-        );
-        const fileData = Asar.readFileFromBytes(
-          asarBytes,
-          offset,
-          (fileEntry as FileEntry).size
-        );
+      if (!opts.noFileData) {
+        // Read all files
+        for (const [, filePath, fileEntry] of this.walkFiles(false)) {
+          // We can assume that fileEntry is a FileEntry,
+          // because we specified walkFiles(false)
+          const offset = (fileEntry as FileEntry).getOffsetFromAsarData(
+            headerSize
+          );
+          const fileData = Asar.readFileFromBytes(
+            asarBytes,
+            offset,
+            (fileEntry as FileEntry).size
+          );
 
-        // Save the file data to its entry in this.files
-        let currentDir = this.files;
-        for (const _pathChunkIndex in filePath) {
-          const pathChunkIndex = parseInt(_pathChunkIndex);
-          const pathChunk = filePath[pathChunkIndex];
+          // Save the file data to its entry in this.files
+          let currentDir = this.files;
+          for (const _pathChunkIndex in filePath) {
+            const pathChunkIndex = parseInt(_pathChunkIndex);
+            const pathChunk = filePath[pathChunkIndex];
 
-          if (!(pathChunk in currentDir)) {
-            throw new Error(
-              "[new Asar] File entry not found in directory structure"
-            );
+            if (!(pathChunk in currentDir)) {
+              throw new Error(
+                "[new Asar] File entry not found in directory structure"
+              );
+            }
+
+            if (pathChunkIndex == filePath.length - 1) {
+              // This is the last chunk, so we can assume it's a file
+              (currentDir[pathChunk] as FileEntryData).data = fileData;
+            }
+
+            currentDir = (currentDir[pathChunk] as DirectoryEntryData).files;
           }
-
-          if (pathChunkIndex == filePath.length - 1) {
-            // This is the last chunk, so we can assume it's a file
-            (currentDir[pathChunk] as FileEntryData).data = fileData;
-          }
-
-          currentDir = (currentDir[pathChunk] as DirectoryEntryData).files;
         }
       }
     } else {
