@@ -381,7 +381,11 @@ export class Asar extends DirectoryEntry {
     }
 
     const returnValue: {
+      /**
+       * The raw Asar archive data that can be saved to a file.
+       */
       bytes: Uint8Array;
+
       rawHeader?: Uint8Array;
       rawHeaderSize?: number;
       headerString?: string;
