@@ -49,7 +49,14 @@ export interface AsarInitialParseData {
  * All options are treated as `false` by default.
  */
 export interface AsarGetDataOptions {
+  /**
+   * By default, the files are sorted alphabetically in
+   * the Asar archive header. If this option is enabled,
+   * the files will not be sorted, which could speed up
+   * getting the Asar archive data.
+   */
   noSort: boolean;
+
   noRecalculateIntegrity: boolean;
   returnRawHeader: boolean;
   returnRawHeaderSize: boolean;
