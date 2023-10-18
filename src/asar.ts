@@ -22,6 +22,12 @@ export interface AsarOptions {
    */
   storeInitialParseData: boolean;
 
+  /**
+   * If enabled, file data will not be read from the Asar archive
+   * when initializing the Asar instance. This is useful if you
+   * only need the directory structure, for example to list files.
+   * Skipping file data will make the initialization faster.
+   */
   noFileData: boolean;
 }
 
