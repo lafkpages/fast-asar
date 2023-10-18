@@ -1,3 +1,5 @@
+/// <reference types="bun-types" />
+
 import { rm, readdir } from "fs/promises";
 import { join as joinPaths } from "path";
 

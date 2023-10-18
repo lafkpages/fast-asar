@@ -1,3 +1,5 @@
+/// <reference types="bun-types" />
+
 // Build types
 const tsc = Bun.spawn(["./node_modules/.bin/tsc"]);
 await tsc.exited;
