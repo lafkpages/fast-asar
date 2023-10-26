@@ -1,13 +1,9 @@
 import { Asar } from "../..";
 
-import { readFile } from "fs/promises";
-
 export default async function extract(...args: string[]) {
   const [archive, output] = args;
 
-  const asarBytes = await readFile(archive);
-
-  const asar = new Asar(asarBytes);
+  const asar = await Asar.fromFile(archive);
 
   await asar.extract(output);
 }
