@@ -165,6 +165,15 @@ export class Asar extends DirectoryEntry {
   }
 
   /**
+   * Creates a new Asar instance from an Asar archive file
+   * @param asarPath The path to the Asar archive file
+   * @returns The Asar instance
+   */
+  static async fromFile(asarPath: string) {
+    return new Asar(await readFile(asarPath));
+  }
+
+  /**
    * Reads a file from the Asar archive
    * @param path The path to the file inside the Asar archive
    * @returns The file data
