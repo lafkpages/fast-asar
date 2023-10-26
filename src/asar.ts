@@ -155,7 +155,7 @@ export class Asar extends DirectoryEntry {
    */
   static async fromDirectory(
     inputDir: string,
-    opts: ConstructorParameters<typeof Asar>[1]
+    opts?: ConstructorParameters<typeof Asar>[1]
   ) {
     const asar = new Asar(undefined, opts);
 
@@ -176,7 +176,7 @@ export class Asar extends DirectoryEntry {
    */
   static async fromFile(
     asarPath: string,
-    opts: ConstructorParameters<typeof Asar>[1]
+    opts?: ConstructorParameters<typeof Asar>[1]
   ) {
     return new Asar(await readFile(asarPath), opts);
   }
