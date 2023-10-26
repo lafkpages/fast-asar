@@ -156,7 +156,7 @@ export class Asar extends DirectoryEntry {
     const asar = new Asar();
 
     for await (const [filePath] of walk(inputDir)) {
-      const fileData = await readFile(joinPaths(inputDir, "..", filePath));
+      const fileData = await readFile(joinPaths(inputDir, filePath));
 
       asar.writeFile(filePath, fileData, true);
     }
