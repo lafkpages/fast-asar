@@ -15,18 +15,19 @@ export async function* walk(
   });
 
   for (const entry of entries) {
-    const entryPath = joinPaths(dir, entry.name);
-
     const isDir = entry.isDirectory();
 
     if (isDir) {
       if (includeDirectories) {
-        yield [entryPath, isDir];
+        yield [entry.name, isDir];
       }
 
-      yield* walk(entryPath);
+      for await (const path of walk(joinPaths(dir, entry.name))) {
+        path[0] = joinPaths(entry.name, path[0]);
+        yield path;
+      }
     } else {
-      yield [entryPath, isDir];
+      yield [entry.name, isDir];
     }
   }
 }
