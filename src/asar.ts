@@ -150,10 +150,14 @@ export class Asar extends DirectoryEntry {
   /**
    * Creates a new Asar instance from a directory
    * @param inputDir The directory to read from
+   * @param opts Options for initialising the Asar instance
    * @returns The Asar instance
    */
-  static async fromDirectory(inputDir: string) {
-    const asar = new Asar();
+  static async fromDirectory(
+    inputDir: string,
+    opts: ConstructorParameters<typeof Asar>[1]
+  ) {
+    const asar = new Asar(undefined, opts);
 
     for await (const [filePath] of walk(inputDir)) {
       const fileData = await readFile(joinPaths(inputDir, filePath));
@@ -167,10 +171,14 @@ export class Asar extends DirectoryEntry {
   /**
    * Creates a new Asar instance from an Asar archive file
    * @param asarPath The path to the Asar archive file
+   * @param opts Options for initialising the Asar instance
    * @returns The Asar instance
    */
-  static async fromFile(asarPath: string) {
-    return new Asar(await readFile(asarPath));
+  static async fromFile(
+    asarPath: string,
+    opts: ConstructorParameters<typeof Asar>[1]
+  ) {
+    return new Asar(await readFile(asarPath), opts);
   }
 
   /**
