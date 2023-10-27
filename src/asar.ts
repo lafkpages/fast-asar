@@ -81,25 +81,25 @@ export class Asar extends DirectoryEntry {
   initialParseData?: AsarInitialParseData;
 
   constructor(asarBytes?: Uint8Array, opts: Partial<AsarOptions> = {}) {
-    debug("[new Asar]");
+    debug(1, "[new Asar]");
 
     if (asarBytes) {
       // Read header size
-      debug("[new Asar] Reading header size");
+      debug(1, "[new Asar] Reading header size");
       const headerSize = createFromBuffer(asarBytes.subarray(0, 16))
         .createIterator()
         .readUInt32();
-      debug("[new Asar] Header size:", headerSize);
+      debug(1, "[new Asar] Header size:", headerSize);
 
       // Read header
       // We start at 16 because 0-8 are the Pickle object containing
       // the header size, and 9-15 are the header size itself
-      debug("[new Asar] Reading header");
+      debug(1, "[new Asar] Reading header");
       const rawHeader = asarBytes.subarray(16, headerSize + 16).toString();
       const header = JSON.parse(rawHeader) as unknown;
 
       if (opts.noHeaderTypeChecks) {
-        debug("[new Asar] Skipping header type checks");
+        debug(2, "[new Asar] Skipping header type checks");
         super(header as DirectoryEntryData);
       } else {
         // Ensure header is an object
@@ -125,7 +125,7 @@ export class Asar extends DirectoryEntry {
 
       if (!opts.noFileData) {
         // Read all files
-        debug("[new Asar] Reading files");
+        debug(1, "[new Asar] Reading files");
         for (const [, filePath, fileEntry] of this.walkFiles(false)) {
           // We can assume that fileEntry is a FileEntry,
           // because we specified walkFiles(false)
@@ -174,11 +174,11 @@ export class Asar extends DirectoryEntry {
     inputDir: string,
     opts?: ConstructorParameters<typeof Asar>[1]
   ) {
-    debug("[Asar.fromDirectory]");
+    debug(1, "[Asar.fromDirectory]");
 
     const asar = new Asar(undefined, opts);
 
-    debug("[Asar.fromDirectory] Walking directory");
+    debug(1, "[Asar.fromDirectory] Walking directory");
     for await (const [filePath] of walk(inputDir)) {
       const fileData = await readFile(joinPaths(inputDir, filePath));
 
@@ -198,7 +198,7 @@ export class Asar extends DirectoryEntry {
     asarPath: string,
     opts?: ConstructorParameters<typeof Asar>[1]
   ) {
-    debug("[Asar.fromFile]", asarPath);
+    debug(1, "[Asar.fromFile]", asarPath);
     return new Asar(await readFile(asarPath), opts);
   }
 
@@ -210,7 +210,7 @@ export class Asar extends DirectoryEntry {
   readFile(
     path: Entry | Parameters<DirectoryEntry["getFromPath"]>[0]
   ): Uint8Array {
-    debug("[Asar.readFile]");
+    debug(3, "[Asar.readFile]");
 
     const entry = BaseEntry.isEntry(path) ? path : this.getFromPath(path);
 
