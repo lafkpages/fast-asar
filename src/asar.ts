@@ -29,6 +29,8 @@ export interface AsarOptions {
    * Skipping file data will make the initialization faster.
    */
   noFileData: boolean;
+
+  noHeaderTypeChecks: boolean;
 }
 
 /**
@@ -87,22 +89,26 @@ export class Asar extends DirectoryEntry {
       const rawHeader = asarBytes.subarray(16, headerSize + 16).toString();
       const header = JSON.parse(rawHeader) as unknown;
 
-      // Ensure header is an object
-      if (typeof header != "object" || header == null) {
-        throw new Error("[new Asar] Invalid header (not an object)");
-      }
+      if (opts.noHeaderTypeChecks) {
+        super(header as DirectoryEntryData);
+      } else {
+        // Ensure header is an object
+        if (typeof header != "object" || header == null) {
+          throw new Error("[new Asar] Invalid header (not an object)");
+        }
 
-      // Ensure header conforms to directory structure
-      if (!BaseEntry.isDirectory(header)) {
-        throw new Error("[new Asar] Invalid header (not a directory)");
-      }
+        // Ensure header conforms to directory structure
+        if (!BaseEntry.isDirectory(header)) {
+          throw new Error("[new Asar] Invalid header (not a directory)");
+        }
 
-      super(header);
+        super(header);
+      }
 
       if (opts.storeInitialParseData) {
         this.initialParseData = {
           headerSize,
-          header,
+          header: header as DirectoryEntryData,
           rawHeader,
         };
       }
