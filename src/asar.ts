@@ -272,6 +272,10 @@ export class Asar extends DirectoryEntry {
    * @param output The directory to extract to
    */
   async extract(output: string) {
+    await mkdir(output, {
+      recursive: true,
+    });
+
     for (const [, filePathChunks, fileEntry] of this.walkFiles(true)) {
       if (BaseEntry.isDirectory(fileEntry)) {
         const fileDirPath = joinPaths(output, ...filePathChunks);
