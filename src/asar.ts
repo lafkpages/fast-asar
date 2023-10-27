@@ -210,6 +210,8 @@ export class Asar extends DirectoryEntry {
   readFile(
     path: Entry | Parameters<DirectoryEntry["getFromPath"]>[0]
   ): Uint8Array {
+    debug("[Asar.readFile]");
+
     const entry = BaseEntry.isEntry(path) ? path : this.getFromPath(path);
 
     if (BaseEntry.isFile(entry)) {
