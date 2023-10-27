@@ -468,8 +468,11 @@ export class Asar extends DirectoryEntry {
    * @param opts Options passed to `Asar.getData`
    */
   async saveData(asarPath: string, opts: Partial<AsarGetDataOptions> = {}) {
+    debug(1, "[Asar.saveData]");
+
     const asarData = this.getData(opts);
 
+    debug(1, "[Asar.saveData] Writing to file");
     await writeFile(asarPath, asarData.bytes);
   }
 }
