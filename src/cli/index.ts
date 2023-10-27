@@ -6,6 +6,7 @@ import { colors, error } from "../log";
 import extract from "./commands/extract";
 import pack from "./commands/pack";
 import list from "./commands/list";
+import inspect from "./commands/inspect";
 import help from "./commands/help";
 
 const command = process.argv[2];
@@ -19,6 +20,7 @@ const commands = {
   extract,
   pack,
   list,
+  inspect,
   help,
 };
 type Command = keyof typeof commands;
