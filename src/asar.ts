@@ -297,18 +297,24 @@ export class Asar extends DirectoryEntry {
    * @param output The directory to extract to
    */
   async extract(output: string) {
+    debug(1, "[Asar.extract]");
+
     await mkdir(output, {
       recursive: true,
     });
 
     for (const [, filePathChunks, fileEntry] of this.walkFiles(true)) {
       if (BaseEntry.isDirectory(fileEntry)) {
+        debug(3, "[Asar.extract] Creating directory", filePathChunks);
+
         const fileDirPath = joinPaths(output, ...filePathChunks);
 
         await mkdir(fileDirPath, {
           recursive: true,
         });
       } else {
+        debug(4, "[Asar.extract] Writing file", filePathChunks);
+
         const filePath = joinPaths(output, ...filePathChunks);
 
         const fileData = this.readFile(fileEntry);
