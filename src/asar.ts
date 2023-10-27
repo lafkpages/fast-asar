@@ -330,6 +330,8 @@ export class Asar extends DirectoryEntry {
    * @returns The Asar archive data, and more if specified in the options
    */
   getData(opts: Partial<AsarGetDataOptions> = {}) {
+    debug(1, "[Asar.getData]");
+
     const headerData: DirectoryEntryData = {
       files: {},
     };
@@ -398,6 +400,8 @@ export class Asar extends DirectoryEntry {
       throw new Error("[Asar.getData] Failed to write header data to Pickle");
     }
     const headerDataBuf = headerPickle.toBuffer();
+
+    debug(2, "[Asar.getData] Header size:", headerDataBuf.length);
 
     const headerSizePickle = createEmpty();
     if (!headerSizePickle.writeUInt32(headerDataBuf.length)) {
