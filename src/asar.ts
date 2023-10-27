@@ -244,6 +244,8 @@ export class Asar extends DirectoryEntry {
     data: string | Uint8Array,
     createDirs = false
   ) {
+    debug(1, "[Asar.writeFile]");
+
     if (typeof path == "string") {
       path = normalizePath(path).split("/");
     }
