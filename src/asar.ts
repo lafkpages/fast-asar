@@ -85,16 +85,16 @@ export class Asar extends DirectoryEntry {
 
     if (asarBytes) {
       // Read header size
-      debug(1, "[new Asar] Reading header size");
+      debug(2, "[new Asar] Reading header size");
       const headerSize = createFromBuffer(asarBytes.subarray(0, 16))
         .createIterator()
         .readUInt32();
-      debug(1, "[new Asar] Header size:", headerSize);
+      debug(2, "[new Asar] Header size:", headerSize);
 
       // Read header
       // We start at 16 because 0-8 are the Pickle object containing
       // the header size, and 9-15 are the header size itself
-      debug(1, "[new Asar] Reading header");
+      debug(2, "[new Asar] Reading header");
       const rawHeader = asarBytes.subarray(16, headerSize + 16).toString();
       const header = JSON.parse(rawHeader) as unknown;
 
@@ -125,7 +125,7 @@ export class Asar extends DirectoryEntry {
 
       if (!opts.noFileData) {
         // Read all files
-        debug(1, "[new Asar] Reading files");
+        debug(2, "[new Asar] Reading files");
         for (const [, filePath, fileEntry] of this.walkFiles(false)) {
           // We can assume that fileEntry is a FileEntry,
           // because we specified walkFiles(false)
@@ -178,7 +178,7 @@ export class Asar extends DirectoryEntry {
 
     const asar = new Asar(undefined, opts);
 
-    debug(1, "[Asar.fromDirectory] Walking directory");
+    debug(2, "[Asar.fromDirectory] Walking directory");
     for await (const [filePath] of walk(inputDir)) {
       const fileData = await readFile(joinPaths(inputDir, filePath));
 
@@ -394,6 +394,7 @@ export class Asar extends DirectoryEntry {
       }
     }
 
+    debug(2, "[Asar.getData] Creating header data");
     const headerDataStr = JSON.stringify(headerData);
     const headerPickle = createEmpty();
     if (!headerPickle.writeString(headerDataStr)) {
@@ -401,8 +402,8 @@ export class Asar extends DirectoryEntry {
     }
     const headerDataBuf = headerPickle.toBuffer();
 
-    debug(2, "[Asar.getData] Header size:", headerDataBuf.length);
-
+    debug(2, "[Asar.getData] Creating header size data");
+    debug(3, "[Asar.getData] Header size:", headerDataBuf.length);
     const headerSizePickle = createEmpty();
     if (!headerSizePickle.writeUInt32(headerDataBuf.length)) {
       throw new Error("[Asar.getData] Failed to write header size to Pickle");
@@ -411,6 +412,7 @@ export class Asar extends DirectoryEntry {
 
     const bufs = [headerSizeDataBuf, headerDataBuf];
 
+    debug(2, "[Asar.getData] Creating file data");
     for (const [, filePath, fileEntry] of entries) {
       if (BaseEntry.isFile(fileEntry)) {
         const fileDataBuf = this.readFile(filePath);
@@ -428,6 +430,7 @@ export class Asar extends DirectoryEntry {
       }
     }
 
+    debug(2, "[Asar.getData] Creating final buffer");
     const buf = new Uint8Array(bufs.reduce((acc, buf) => acc + buf.length, 0));
 
     let offset = 0;
@@ -472,7 +475,7 @@ export class Asar extends DirectoryEntry {
 
     const asarData = this.getData(opts);
 
-    debug(1, "[Asar.saveData] Writing to file");
+    debug(2, "[Asar.saveData] Writing to file");
     await writeFile(asarPath, asarData.bytes);
   }
 }
