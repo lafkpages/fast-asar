@@ -81,7 +81,7 @@ export class Asar extends DirectoryEntry {
   initialParseData?: AsarInitialParseData;
 
   constructor(asarBytes?: Uint8Array, opts: Partial<AsarOptions> = {}) {
-    debug("[new Asar] Init");
+    debug("[new Asar]");
 
     if (asarBytes) {
       // Read header size
@@ -174,8 +174,11 @@ export class Asar extends DirectoryEntry {
     inputDir: string,
     opts?: ConstructorParameters<typeof Asar>[1]
   ) {
+    debug("[Asar.fromDirectory]");
+
     const asar = new Asar(undefined, opts);
 
+    debug("[Asar.fromDirectory] Walking directory");
     for await (const [filePath] of walk(inputDir)) {
       const fileData = await readFile(joinPaths(inputDir, filePath));
 
