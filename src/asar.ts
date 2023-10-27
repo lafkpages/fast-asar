@@ -30,6 +30,9 @@ export interface AsarOptions {
    */
   noFileData: boolean;
 
+  /**
+   * Skip runtime type checks for the Asar archive header.
+   */
   noHeaderTypeChecks: boolean;
 }
 
