@@ -13,12 +13,14 @@ export default async function inspect(...args: string[]) {
     console.log("header size:", asar.initialParseData?.headerSize);
   }
 
-  if (asar.initialParseData?.rawHeader !== undefined) {
+  if (asar.initialParseData?.header !== undefined) {
+    const prettyHeader = JSON.stringify(asar.initialParseData.header, null, 2);
+
     if (rawHeaderDest) {
-      await writeFile(rawHeaderDest, asar.initialParseData.rawHeader);
+      await writeFile(rawHeaderDest, prettyHeader);
       console.log("raw header written to", rawHeaderDest);
     } else {
-      console.log("raw header:", asar.initialParseData.rawHeader);
+      console.log("raw header:", prettyHeader);
     }
   }
 }
