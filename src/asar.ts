@@ -4,6 +4,7 @@ import { createFromBuffer, createEmpty } from "@tybys/chromium-pickle-js";
 import { readFile, writeFile, mkdir } from "fs/promises";
 
 import { walk } from "./utils/fs";
+import { debug } from "./utils/debug";
 
 import { BaseEntry, FileEntry, DirectoryEntry } from "./entries";
 
@@ -80,19 +81,25 @@ export class Asar extends DirectoryEntry {
   initialParseData?: AsarInitialParseData;
 
   constructor(asarBytes?: Uint8Array, opts: Partial<AsarOptions> = {}) {
+    debug("[new Asar] Init");
+
     if (asarBytes) {
       // Read header size
+      debug("[new Asar] Reading header size");
       const headerSize = createFromBuffer(asarBytes.subarray(0, 16))
         .createIterator()
         .readUInt32();
+      debug("[new Asar] Header size:", headerSize);
 
       // Read header
       // We start at 16 because 0-8 are the Pickle object containing
       // the header size, and 9-15 are the header size itself
+      debug("[new Asar] Reading header");
       const rawHeader = asarBytes.subarray(16, headerSize + 16).toString();
       const header = JSON.parse(rawHeader) as unknown;
 
       if (opts.noHeaderTypeChecks) {
+        debug("[new Asar] Skipping header type checks");
         super(header as DirectoryEntryData);
       } else {
         // Ensure header is an object
@@ -118,6 +125,7 @@ export class Asar extends DirectoryEntry {
 
       if (!opts.noFileData) {
         // Read all files
+        debug("[new Asar] Reading files");
         for (const [, filePath, fileEntry] of this.walkFiles(false)) {
           // We can assume that fileEntry is a FileEntry,
           // because we specified walkFiles(false)
