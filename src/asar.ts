@@ -198,6 +198,7 @@ export class Asar extends DirectoryEntry {
     asarPath: string,
     opts?: ConstructorParameters<typeof Asar>[1]
   ) {
+    debug("[Asar.fromFile]");
     return new Asar(await readFile(asarPath), opts);
   }
 
