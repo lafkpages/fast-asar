@@ -7,6 +7,7 @@ export default async function inspect(...args: string[]) {
 
   const asar = await Asar.fromFile(archive, {
     storeInitialParseData: true,
+    noFileData: true,
   });
 
   if (asar.initialParseData?.headerSize !== undefined) {
