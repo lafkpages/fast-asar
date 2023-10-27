@@ -18,6 +18,9 @@ ${colors.blue.bold("Commands:")}
   ${colors.blue("list")} ${colors.yellow(
       "<archive>"
     )}              List the contents of an archive
+  ${colors.blue("inspect")} ${colors.yellow(
+      "<archive>"
+    )}           Inspect an archive (mostly for debugging)
   ${colors.blue("help")}                        Show this help message
 
 ${colors.magenta.bold("Examples:")}
@@ -29,6 +32,9 @@ ${colors.magenta.bold("Examples:")}
     )} ${colors.yellow("app/ app.asar")}
   ${colors.magenta("bunx")} ${colors.green("fast-asar")} ${colors.blue(
       "list"
+    )} ${colors.yellow("app.asar")}
+  ${colors.magenta("bunx")} ${colors.green("fast-asar")} ${colors.blue(
+      "inspect"
     )} ${colors.yellow("app.asar")}
   ${colors.magenta("bunx")} ${colors.green("fast-asar")} ${colors.blue(
       "help"
