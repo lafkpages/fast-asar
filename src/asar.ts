@@ -86,16 +86,17 @@ export class Asar extends DirectoryEntry {
     if (asarBytes) {
       // Read header size
       debug(2, "[new Asar] Reading header size");
-      const headerSize = createFromBuffer(asarBytes.subarray(0, 16))
-        .createIterator()
-        .readUInt32();
+      const headerSize =
+        createFromBuffer(asarBytes.subarray(0, 16))
+          .createIterator()
+          .readUInt32() + 16;
       debug(2, "[new Asar] Header size:", headerSize);
 
       // Read header
       // We start at 16 because 0-8 are the Pickle object containing
       // the header size, and 9-15 are the header size itself
       debug(2, "[new Asar] Reading header");
-      const rawHeader = asarBytes.subarray(16, headerSize + 16).toString();
+      const rawHeader = asarBytes.subarray(16, headerSize).toString();
       const header = JSON.parse(rawHeader) as unknown;
 
       if (opts.noHeaderTypeChecks) {
