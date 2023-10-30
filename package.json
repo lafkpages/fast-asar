@@ -1,6 +1,6 @@
 {
   "name": "fast-asar",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "dist/index.js",
   "devDependencies": {
     "@electron/asar": "^3.2.7",
