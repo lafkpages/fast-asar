@@ -1,5 +1,5 @@
 import { normalize as normalizePath, join as joinPaths } from "path";
-import { createFromBuffer, createEmpty } from "@tybys/chromium-pickle-js";
+import { createFromBuffer, createEmpty } from "chromium-pickle-js";
 
 import { readFile, writeFile, mkdir } from "fs/promises";
 
